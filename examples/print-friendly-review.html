@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Print-Friendly Application Review | A11y Form Wizard</title>
+    <link rel="icon" href="data:," />
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+      body { background: #edf1f5; color: #172033; line-height: 1.55; margin: 0; }
+      a { color: #174ea6; font-weight: 700; text-underline-offset: 0.18em; }
+      :focus-visible { outline: 0.1875rem solid #172033; outline-offset: 0.1875rem; }
+      .review-skip-link { background: #172033; color: #fff; inset-block-start: 0.75rem; inset-inline-start: 0.75rem; padding: 0.75rem 1rem; position: fixed; transform: translateY(-200%); z-index: 10; }
+      .review-skip-link:focus { transform: translateY(0); }
+      .review-site-header, .review-page, .review-site-footer { inline-size: min(100% - 2rem, 70rem); margin-inline: auto; }
+      .review-site-header { align-items: center; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; padding-block: 1.25rem; }
+      .review-brand { color: #172033; font-size: 1.05rem; text-decoration: none; }
+      .review-page { display: grid; gap: 1.5rem; padding-block: 1rem 3rem; }
+      .review-intro { max-inline-size: 52rem; }
+      .review-eyebrow { color: #8a4b08; font-size: 0.78rem; font-weight: 850; letter-spacing: 0.08em; margin: 0; text-transform: uppercase; }
+      .review-intro h2, .review-notes h2 { font-size: clamp(1.5rem, 4vw, 2rem); line-height: 1.15; margin: 0.4rem 0 0.75rem; }
+      .review-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-block-start: 1.25rem; }
+      .review-button { background: #174ea6; border: 0.125rem solid #174ea6; border-radius: 0.5rem; color: #fff; cursor: pointer; font: inherit; font-weight: 800; min-block-size: 2.85rem; padding: 0.65rem 1rem; }
+      .review-button:hover { background: #123f87; border-color: #123f87; }
+      .review-sheet { background: #fff; border: 0.0625rem solid #c8d1dc; border-radius: 0.75rem; box-shadow: 0 1.5rem 3rem rgb(23 32 51 / 0.1); padding: clamp(1rem, 5vw, 3rem); }
+      .review-sheet__header { border-block-end: 0.125rem solid #172033; padding-block-end: 1.25rem; }
+      .review-sheet h1 { font-size: clamp(2rem, 7vw, 3.6rem); letter-spacing: -0.04em; line-height: 1; margin: 0.4rem 0 0.75rem; }
+      .review-sheet__meta { color: #4b5870; display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin: 0; }
+      .review-group { break-inside: avoid; border-block-end: 0.0625rem solid #d8dee8; padding-block: 1.5rem; }
+      .review-group:last-of-type { border-block-end: 0; }
+      .review-group h2 { font-size: 1.25rem; margin: 0 0 1rem; }
+      .review-answers { display: grid; gap: 1rem; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0; }
+      .review-answer { min-inline-size: 0; }
+      .review-answer--wide { grid-column: 1 / -1; }
+      .review-answer dt { color: #536078; font-size: 0.82rem; font-weight: 800; letter-spacing: 0.035em; text-transform: uppercase; }
+      .review-answer dd { margin: 0.25rem 0 0; overflow-wrap: anywhere; }
+      .review-sheet__footer { background: #f5f7fa; border-inline-start: 0.25rem solid #174ea6; margin-block-start: 1.25rem; padding: 1rem 1.25rem; }
+      .review-sheet__footer p { margin: 0; }
+      .review-notes { background: #fff; border: 0.0625rem solid #c8d1dc; border-radius: 0.75rem; padding: clamp(1rem, 4vw, 2rem); }
+      .review-notes__grid { display: grid; gap: 1.5rem; }
+      .review-notes h3 { margin-block-end: 0.5rem; }
+      .review-notes ol, .review-notes ul { padding-inline-start: 1.25rem; }
+      .review-code summary { cursor: pointer; font-weight: 800; }
+      .review-code pre { background: #111827; border-radius: 0.6rem; color: #e5e7eb; font-size: 0.82rem; line-height: 1.5; overflow-x: auto; padding: 1rem; }
+      .review-site-footer { color: #536078; padding-block: 0 3rem; }
+
+      @media (min-width: 48rem) {
+        .review-notes__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
+
+      @media (max-width: 34rem) {
+        .review-site-header, .review-page, .review-site-footer { inline-size: min(100% - 1rem, 70rem); }
+        .review-answers { grid-template-columns: 1fr; }
+        .review-answer--wide { grid-column: auto; }
+        .review-button { inline-size: 100%; }
+      }
+
+      @page { margin: 16mm; }
+
+      @media print {
+        :root { color-scheme: light; }
+        body { background: #fff; color: #000; font-family: Georgia, "Times New Roman", serif; font-size: 10.5pt; }
+        .review-print-hidden { display: none !important; }
+        .review-page { display: block; inline-size: 100%; padding: 0; }
+        .review-sheet { border: 0; border-radius: 0; box-shadow: none; padding: 0; }
+        .review-sheet__header { border-color: #000; }
+        .review-sheet h1 { font-size: 25pt; }
+        .review-sheet__meta, .review-answer dt { color: #222; }
+        .review-group { border-color: #777; break-inside: avoid-page; page-break-inside: avoid; }
+        .review-answers { gap: 0.75rem 1.25rem; }
+        .review-sheet__footer { background: transparent; border-color: #000; }
+        a { color: #000; text-decoration: underline; }
+      }
+    </style>
+  <!-- seo-meta:start -->
+    <meta name="description" content="Review a completed application with semantic, print-friendly markup and no runtime PDF generation in this accessible form example." />
+    <meta name="robots" content="index,follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="A11y Form Wizard" />
+    <meta property="og:title" content="Print-Friendly Application Review | A11y Form Wizard" />
+    <meta property="og:description" content="Review a completed application with semantic, print-friendly markup and no runtime PDF generation in this accessible form example." />
+    <meta property="og:image" content="https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png" />
+    <meta property="og:image:alt" content="A11y Form Wizard accessible multistep form flow illustration" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Print-Friendly Application Review | A11y Form Wizard" />
+    <meta name="twitter:description" content="Review a completed application with semantic, print-friendly markup and no runtime PDF generation in this accessible form example." />
+    <meta name="twitter:image" content="https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png" />
+    <meta name="twitter:image:alt" content="A11y Form Wizard accessible multistep form flow illustration" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "name": "Print-Friendly Application Review | A11y Form Wizard",
+      "description": "Review a completed application with semantic, print-friendly markup and no runtime PDF generation in this accessible form example.",
+      "image": "https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png",
+      "inLanguage": "en",
+      "mainEntity": {
+        "@type": "SoftwareSourceCode",
+        "name": "A11y Form Wizard",
+        "description": "Accessible reusable vanilla JavaScript multistep form wizard.",
+        "codeRepository": "https://github.com/vmitsaras/A11y-Form-Wizard",
+        "programmingLanguage": [
+          "TypeScript",
+          "JavaScript"
+        ],
+        "runtimePlatform": "Browser",
+        "version": "1.0.0",
+        "license": "MIT",
+        "keywords": [
+          "accessibility",
+          "form",
+          "form wizard",
+          "multistep form",
+          "progressive enhancement",
+          "TypeScript",
+          "WCAG"
+        ],
+        "image": "https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png",
+        "creator": {
+          "@type": "Person",
+          "name": "Vasileios Mitsaras",
+          "url": "https://github.com/vmitsaras/",
+          "sameAs": [
+            "https://github.com/vmitsaras/",
+            "https://linkedin.com/in/vasilis-mitsaras"
+          ]
+        },
+        "targetProduct": {
+          "@type": "SoftwareApplication",
+          "name": "Modern web browsers",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Any",
+          "runtimePlatform": "Browser"
+        }
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "A11y Form Wizard",
+      "description": "Accessible reusable vanilla JavaScript multistep form wizard.",
+      "codeRepository": "https://github.com/vmitsaras/A11y-Form-Wizard",
+      "programmingLanguage": [
+        "TypeScript",
+        "JavaScript"
+      ],
+      "runtimePlatform": "Browser",
+      "version": "1.0.0",
+      "license": "MIT",
+      "keywords": [
+        "accessibility",
+        "form",
+        "form wizard",
+        "multistep form",
+        "progressive enhancement",
+        "TypeScript",
+        "WCAG"
+      ],
+      "image": "https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png",
+      "creator": {
+        "@type": "Person",
+        "name": "Vasileios Mitsaras",
+        "url": "https://github.com/vmitsaras/",
+        "sameAs": [
+          "https://github.com/vmitsaras/",
+          "https://linkedin.com/in/vasilis-mitsaras"
+        ]
+      },
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "Modern web browsers",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "runtimePlatform": "Browser"
+      }
+    }
+  ]
+}
+    </script>
+    <!-- seo-meta:end -->
+  </head>
+  <body>
+    <a class="review-skip-link review-print-hidden" href="#review-main">Skip to application review</a>
+
+    <header class="review-site-header review-print-hidden">
+      <a class="review-brand" href="../">A11y Form Wizard examples</a>
+      <a href="#implementation-notes">How this example works</a>
+    </header>
+
+    <main class="review-page" id="review-main">
+      <section class="review-intro review-print-hidden" aria-labelledby="review-intro-title">
+        <p class="review-eyebrow">Print and review pattern</p>
+        <h2 id="review-intro-title">Inspect a semantic review before printing</h2>
+        <p>
+          This page represents a review generated by a server or application after
+          submission. It does not reconstruct wizard state and it does not generate a
+          PDF. The browser print dialog and the print stylesheet create the printable view.
+        </p>
+        <div class="review-actions">
+          <button class="review-button" type="button" data-print-review>Print review</button>
+        </div>
+        <p>In Print Preview, confirm that navigation, instructions, and the button are absent while every answer remains readable.</p>
+      </section>
+
+      <article class="review-sheet" aria-labelledby="application-review-title">
+        <header class="review-sheet__header">
+          <p class="review-eyebrow">Fictional application · Reference AFW-2048</p>
+          <h1 id="application-review-title">Application review</h1>
+          <p class="review-sheet__meta"><span>Customer Support Specialist</span><span>Submitted 31 August 2026</span><span>Status: Ready for review</span></p>
+        </header>
+
+        <section class="review-group" aria-labelledby="applicant-heading">
+          <h2 id="applicant-heading">Applicant details</h2>
+          <dl class="review-answers">
+            <div class="review-answer"><dt>Full name</dt><dd>Alex Morgan</dd></div>
+            <div class="review-answer"><dt>Email</dt><dd>alex.morgan@example.com</dd></div>
+            <div class="review-answer"><dt>Phone</dt><dd>+49 30 5550 0184</dd></div>
+            <div class="review-answer"><dt>Location</dt><dd>Berlin, Germany</dd></div>
+          </dl>
+        </section>
+
+        <section class="review-group" aria-labelledby="experience-heading">
+          <h2 id="experience-heading">Experience and availability</h2>
+          <dl class="review-answers">
+            <div class="review-answer"><dt>Relevant experience</dt><dd>4 years</dd></div>
+            <div class="review-answer"><dt>Preferred schedule</dt><dd>Monday–Friday, 09:00–17:00 CET</dd></div>
+            <div class="review-answer"><dt>Available from</dt><dd>21 September 2026</dd></div>
+            <div class="review-answer"><dt>Work arrangement</dt><dd>Hybrid</dd></div>
+            <div class="review-answer review-answer--wide"><dt>Experience summary</dt><dd>Supported subscription customers by email and chat, documented recurring issues, and partnered with engineering on accessible account-recovery guidance.</dd></div>
+          </dl>
+        </section>
+
+        <section class="review-group" aria-labelledby="preferences-heading">
+          <h2 id="preferences-heading">Communication preferences</h2>
+          <dl class="review-answers">
+            <div class="review-answer"><dt>Preferred contact method</dt><dd>Email</dd></div>
+            <div class="review-answer"><dt>Interview format</dt><dd>Video call with live captions</dd></div>
+            <div class="review-answer review-answer--wide"><dt>Interview access request</dt><dd>Please provide the interview questions in writing as they are introduced.</dd></div>
+          </dl>
+        </section>
+
+        <footer class="review-sheet__footer">
+          <p><strong>Privacy note:</strong> This fictional record exists only in the static example. Production reviews should minimize personal data and follow the organization’s retention policy.</p>
+        </footer>
+      </article>
+
+      <section class="review-notes review-print-hidden" id="implementation-notes" aria-labelledby="implementation-title">
+        <p class="review-eyebrow">Developer copy path</p>
+        <h2 id="implementation-title">How the printable view works</h2>
+        <div class="review-notes__grid">
+          <div>
+            <h3>Semantic structure</h3>
+            <ul>
+              <li>The review is an <code>&lt;article&gt;</code> with labelled sections.</li>
+              <li>Each question and answer uses a description-list term and description.</li>
+              <li>The content remains complete when JavaScript is unavailable.</li>
+            </ul>
+            <details class="review-code">
+              <summary>Copy the markup pattern</summary>
+              <pre><code>&lt;section aria-labelledby="contact-heading"&gt;
+  &lt;h2 id="contact-heading"&gt;Contact&lt;/h2&gt;
+  &lt;dl&gt;
+    &lt;div&gt;
+      &lt;dt&gt;Email&lt;/dt&gt;
+      &lt;dd&gt;alex@example.com&lt;/dd&gt;
+    &lt;/div&gt;
+  &lt;/dl&gt;
+&lt;/section&gt;</code></pre>
+            </details>
+          </div>
+          <div>
+            <h3>Print presentation</h3>
+            <ul>
+              <li>Screen-only controls use one explicit print-hidden class.</li>
+              <li>Print removes decorative surfaces and restores black text on white.</li>
+              <li>Answer groups avoid page breaks where the browser supports it.</li>
+            </ul>
+            <details class="review-code">
+              <summary>Copy the print CSS pattern</summary>
+              <pre><code>@media print {
+  .print-hidden { display: none !important; }
+  .review { border: 0; box-shadow: none; }
+  .review-group {
+    break-inside: avoid-page;
+    page-break-inside: avoid;
+  }
+}</code></pre>
+            </details>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="review-site-footer review-print-hidden"><p>Static example only. No form data is stored, submitted, or converted to PDF.</p></footer>
+
+    <script>
+      const printButton = document.querySelector("[data-print-review]");
+      if (printButton instanceof HTMLButtonElement) {
+        printButton.addEventListener("click", () => window.print());
+      }
+    </script>
+  </body>
+</html>

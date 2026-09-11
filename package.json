@@ -1,0 +1,88 @@
+{
+  "name": "a11y-form-wizard",
+  "version": "1.0.0",
+  "description": "Accessible reusable vanilla JavaScript multistep form wizard.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./docs": {
+      "types": "./dist/docs.d.ts",
+      "import": "./dist/docs.js"
+    },
+    "./integrations/a11y-form-validator": {
+      "types": "./dist/integrations/a11y-form-validator.d.ts",
+      "import": "./dist/integrations/a11y-form-validator.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "scripts": {
+    "clean": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\"",
+    "build": "npm run pages:build",
+    "build:dist": "npm run clean && tsdown && npm run copy:assets",
+    "copy:assets": "node -e \"const fs = require('node:fs'); if (fs.existsSync('src/styles.css')) { fs.mkdirSync('dist', { recursive: true }); fs.copyFileSync('src/styles.css', 'dist/styles.css'); }\"",
+    "pages:generate": "node scripts/build-pages.mjs",
+    "pages:build": "npm run build:dist && npm run seo:generate && npm run pages:generate",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "pack:check": "npm pack --dry-run --cache ./.npm-cache",
+    "prepack": "npm run build:dist",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "npm run test && npm run typecheck && npm run build:dist && changeset publish",
+    "start": "python3 -m http.server 4173",
+    "docs:sync": "npm run pages:build",
+    "seo:generate": "node scripts/generate-seo-metadata.mjs",
+    "docs:serve": "python3 -m http.server 4173 --bind 127.0.0.1 -d docs",
+    "check": "npm run typecheck && npm run test"
+  },
+  "keywords": [
+    "accessibility",
+    "form",
+    "form-wizard",
+    "multistep-form",
+    "wizard",
+    "typescript",
+    "wcag"
+  ],
+  "author": "Vasileios Mitsaras",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vmitsaras/A11y-Form-Wizard.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vmitsaras/A11y-Form-Wizard/issues"
+  },
+  "homepage": "https://github.com/vmitsaras/A11y-Form-Wizard#readme",
+  "peerDependencies": {
+    "a11y-form-validator": "1.0.19"
+  },
+  "peerDependenciesMeta": {
+    "a11y-form-validator": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.31.0",
+    "jsdom": "^29.1.1",
+    "tsdown": "^0.22.3",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.9"
+  }
+}

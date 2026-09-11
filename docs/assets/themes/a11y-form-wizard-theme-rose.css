@@ -1,0 +1,31 @@
+/*
+  A11y Form Wizard rose theme
+*/
+
+.a11y-form-wizard[data-theme="rose"] {
+  color-scheme: light;
+  --afw-text: #27141a;
+  --afw-muted: #6f4a55;
+  --afw-subtle: #8a6270;
+  --afw-page: #fff6f7;
+  --afw-surface: #ffffff;
+  --afw-panel: #fdecef;
+  --afw-choice-surface: #ffffff;
+  --afw-choice-surface-hover: #fff1f4;
+  --afw-field-surface: #ffffff;
+  --afw-border: #efd0d9;
+  --afw-accent: #be3455;
+  --afw-accent-strong: #972642;
+  --afw-accent-contrast: #ffffff;
+  --afw-complete: #287a52;
+  --afw-complete-contrast: #ffffff;
+  --afw-complete-surface: #eaf8f0;
+  --afw-warning: #985c19;
+  --afw-error: #b42318;
+  --afw-focus: #27141a;
+  --afw-mix-light: #ffffff;
+  --afw-shell-background: var(--afw-page);
+  --afw-progress-track: #f7dfe5;
+  --afw-progress-fill: linear-gradient(90deg, var(--afw-accent), var(--afw-warning));
+  --afw-choice-checked-surface: #fff1f4;
+}

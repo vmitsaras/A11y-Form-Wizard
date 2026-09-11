@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Review and Edit Form Example | A11y Form Wizard</title>
+    <link rel="stylesheet" href="../dist/styles.css" />
+  <!-- seo-meta:start -->
+    <meta name="description" content="See explicitly mapped review values and native edit actions return focus to the relevant step in an accessible multistep form." />
+    <meta name="robots" content="index,follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="A11y Form Wizard" />
+    <meta property="og:title" content="Review and Edit Form Example | A11y Form Wizard" />
+    <meta property="og:description" content="See explicitly mapped review values and native edit actions return focus to the relevant step in an accessible multistep form." />
+    <meta property="og:image" content="https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png" />
+    <meta property="og:image:alt" content="A11y Form Wizard accessible multistep form flow illustration" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Review and Edit Form Example | A11y Form Wizard" />
+    <meta name="twitter:description" content="See explicitly mapped review values and native edit actions return focus to the relevant step in an accessible multistep form." />
+    <meta name="twitter:image" content="https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png" />
+    <meta name="twitter:image:alt" content="A11y Form Wizard accessible multistep form flow illustration" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "name": "Review and Edit Form Example | A11y Form Wizard",
+      "description": "See explicitly mapped review values and native edit actions return focus to the relevant step in an accessible multistep form.",
+      "image": "https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png",
+      "inLanguage": "en",
+      "mainEntity": {
+        "@type": "SoftwareSourceCode",
+        "name": "A11y Form Wizard",
+        "description": "Accessible reusable vanilla JavaScript multistep form wizard.",
+        "codeRepository": "https://github.com/vmitsaras/A11y-Form-Wizard",
+        "programmingLanguage": [
+          "TypeScript",
+          "JavaScript"
+        ],
+        "runtimePlatform": "Browser",
+        "version": "1.0.0",
+        "license": "MIT",
+        "keywords": [
+          "accessibility",
+          "form",
+          "form wizard",
+          "multistep form",
+          "progressive enhancement",
+          "TypeScript",
+          "WCAG"
+        ],
+        "image": "https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png",
+        "creator": {
+          "@type": "Person",
+          "name": "Vasileios Mitsaras",
+          "url": "https://github.com/vmitsaras/",
+          "sameAs": [
+            "https://github.com/vmitsaras/",
+            "https://linkedin.com/in/vasilis-mitsaras"
+          ]
+        },
+        "targetProduct": {
+          "@type": "SoftwareApplication",
+          "name": "Modern web browsers",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Any",
+          "runtimePlatform": "Browser"
+        }
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "A11y Form Wizard",
+      "description": "Accessible reusable vanilla JavaScript multistep form wizard.",
+      "codeRepository": "https://github.com/vmitsaras/A11y-Form-Wizard",
+      "programmingLanguage": [
+        "TypeScript",
+        "JavaScript"
+      ],
+      "runtimePlatform": "Browser",
+      "version": "1.0.0",
+      "license": "MIT",
+      "keywords": [
+        "accessibility",
+        "form",
+        "form wizard",
+        "multistep form",
+        "progressive enhancement",
+        "TypeScript",
+        "WCAG"
+      ],
+      "image": "https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png",
+      "creator": {
+        "@type": "Person",
+        "name": "Vasileios Mitsaras",
+        "url": "https://github.com/vmitsaras/",
+        "sameAs": [
+          "https://github.com/vmitsaras/",
+          "https://linkedin.com/in/vasilis-mitsaras"
+        ]
+      },
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "Modern web browsers",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "runtimePlatform": "Browser"
+      }
+    }
+  ]
+}
+    </script>
+    <!-- seo-meta:end -->
+  </head>
+  <body class="a11y-form-wizard-demo">
+    <main>
+      <section
+        class="a11y-form-wizard"
+        data-a11y-form-wizard
+        data-prevent-submit="true"
+        aria-labelledby="review-example-title"
+      >
+        <div class="a11y-form-wizard__shell">
+          <div class="a11y-form-wizard__layout">
+            <header class="a11y-form-wizard__header">
+              <p class="a11y-form-wizard__eyebrow">Example</p>
+              <h1 class="a11y-form-wizard__headline" id="review-example-title">
+                Review and edit your answers
+              </h1>
+              <p class="a11y-form-wizard__lede">
+                Review values come from explicit field mappings. Edit buttons
+                return focus to the heading for the relevant step.
+              </p>
+            </header>
+
+            <form class="a11y-form-wizard__form" action="/apply" method="post">
+              <div class="a11y-form-wizard__progress-wrap" aria-label="Form progress">
+                <progress
+                  class="a11y-form-wizard__progress"
+                  max="3"
+                  value="1"
+                  aria-label="Form progress"
+                  data-a11y-form-wizard-progress
+                ></progress>
+                <p class="a11y-form-wizard__progress-label">
+                  Step <span data-a11y-form-wizard-current-step>1</span> of
+                  <span data-a11y-form-wizard-total-steps>3</span>
+                </p>
+              </div>
+
+              <div
+                class="a11y-form-wizard__error-summary"
+                data-a11y-form-wizard-error-summary
+                hidden
+              ></div>
+              <div
+                class="a11y-form-wizard__sr-only"
+                data-a11y-form-wizard-live
+              ></div>
+
+              <fieldset
+                class="a11y-form-wizard__step"
+                id="review-preferences-step"
+                data-a11y-form-wizard-step
+              >
+                <legend>Preferences</legend>
+                <h2
+                  class="a11y-form-wizard__title"
+                  data-a11y-form-wizard-step-heading
+                >
+                  Choose your contact preference
+                </h2>
+
+                <div class="a11y-form-wizard__choices">
+                  <label class="a11y-form-wizard__choice" for="review-contact-email">
+                    <input
+                      class="a11y-form-wizard__choice-input"
+                      id="review-contact-email"
+                      type="radio"
+                      name="contact_preference"
+                      value="email"
+                      required
+                    />
+                    <span class="a11y-form-wizard__choice-text">
+                      <span class="a11y-form-wizard__choice-label">Email updates</span>
+                      <span class="a11y-form-wizard__choice-description">
+                        Receive application updates by email.
+                      </span>
+                    </span>
+                  </label>
+
+                  <label class="a11y-form-wizard__choice" for="review-contact-phone">
+                    <input
+                      class="a11y-form-wizard__choice-input"
+                      id="review-contact-phone"
+                      type="radio"
+                      name="contact_preference"
+                      value="phone"
+                      required
+                    />
+                    <span class="a11y-form-wizard__choice-text">
+                      <span class="a11y-form-wizard__choice-label">Phone call</span>
+                      <span class="a11y-form-wizard__choice-description">
+                        Receive a call when an update needs attention.
+                      </span>
+                    </span>
+                  </label>
+                </div>
+
+                <div class="a11y-form-wizard__actions">
+                  <button
+                    class="a11y-form-wizard__button a11y-form-wizard__button--primary"
+                    type="button"
+                    data-a11y-form-wizard-next
+                  >
+                    Continue
+                  </button>
+                </div>
+              </fieldset>
+
+              <fieldset
+                class="a11y-form-wizard__step"
+                id="review-contact-step"
+                data-a11y-form-wizard-step
+              >
+                <legend>Contact details</legend>
+                <h2
+                  class="a11y-form-wizard__title"
+                  data-a11y-form-wizard-step-heading
+                >
+                  Tell us how to reach you
+                </h2>
+
+                <div class="a11y-form-wizard__fields">
+                  <div class="a11y-form-wizard__field">
+                    <label class="a11y-form-wizard__field-label" for="review-name">
+                      Full name
+                    </label>
+                    <div class="a11y-form-wizard__field-shell">
+                      <input
+                        class="a11y-form-wizard__input"
+                        id="review-name"
+                        name="name"
+                        autocomplete="name"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div class="a11y-form-wizard__field">
+                    <label class="a11y-form-wizard__field-label" for="review-email">
+                      Email
+                    </label>
+                    <div class="a11y-form-wizard__field-shell">
+                      <input
+                        class="a11y-form-wizard__input"
+                        id="review-email"
+                        name="email"
+                        type="email"
+                        autocomplete="email"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div class="a11y-form-wizard__field">
+                    <label class="a11y-form-wizard__field-label" for="review-time">
+                      Best contact time
+                    </label>
+                    <div class="a11y-form-wizard__field-shell">
+                      <select
+                        class="a11y-form-wizard__select"
+                        id="review-time"
+                        name="contact_time"
+                      >
+                        <option value="">No preference</option>
+                        <option value="morning">Morning</option>
+                        <option value="afternoon">Afternoon</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="a11y-form-wizard__actions">
+                  <button
+                    class="a11y-form-wizard__button a11y-form-wizard__button--secondary"
+                    type="button"
+                    data-a11y-form-wizard-previous
+                  >
+                    Back
+                  </button>
+                  <button
+                    class="a11y-form-wizard__button a11y-form-wizard__button--primary"
+                    type="button"
+                    data-a11y-form-wizard-next
+                  >
+                    Review answers
+                  </button>
+                </div>
+              </fieldset>
+
+              <fieldset
+                class="a11y-form-wizard__step"
+                id="review-summary-step"
+                data-a11y-form-wizard-step
+                data-a11y-form-wizard-review-step
+              >
+                <legend>Review</legend>
+                <h2
+                  class="a11y-form-wizard__title"
+                  data-a11y-form-wizard-step-heading
+                >
+                  Check your answers before submitting
+                </h2>
+                <p>
+                  Only values that the author maps below are repeated. Sensitive
+                  values should be omitted and described with static text.
+                </p>
+
+                <div class="a11y-form-wizard__review">
+                  <section
+                    class="a11y-form-wizard__review-group"
+                    aria-labelledby="review-preferences-heading"
+                  >
+                    <h3
+                      class="a11y-form-wizard__review-heading"
+                      id="review-preferences-heading"
+                    >
+                      Preferences
+                    </h3>
+                    <dl class="a11y-form-wizard__review-list">
+                      <div class="a11y-form-wizard__review-row">
+                        <dt class="a11y-form-wizard__review-term">
+                          Contact preference
+                        </dt>
+                        <dd
+                          class="a11y-form-wizard__review-value"
+                          data-a11y-form-wizard-review-value="contact_preference"
+                        >
+                          Not provided
+                        </dd>
+                      </div>
+                    </dl>
+                    <button
+                      class="a11y-form-wizard__button a11y-form-wizard__button--secondary"
+                      type="button"
+                      data-a11y-form-wizard-edit-step="review-preferences-step"
+                      hidden
+                    >
+                      Edit preferences
+                    </button>
+                  </section>
+
+                  <section
+                    class="a11y-form-wizard__review-group"
+                    aria-labelledby="review-contact-heading"
+                  >
+                    <h3
+                      class="a11y-form-wizard__review-heading"
+                      id="review-contact-heading"
+                    >
+                      Contact details
+                    </h3>
+                    <dl class="a11y-form-wizard__review-list">
+                      <div class="a11y-form-wizard__review-row">
+                        <dt class="a11y-form-wizard__review-term">Full name</dt>
+                        <dd
+                          class="a11y-form-wizard__review-value"
+                          data-a11y-form-wizard-review-value="name"
+                        >
+                          Not provided
+                        </dd>
+                      </div>
+                      <div class="a11y-form-wizard__review-row">
+                        <dt class="a11y-form-wizard__review-term">Email</dt>
+                        <dd
+                          class="a11y-form-wizard__review-value"
+                          data-a11y-form-wizard-review-value="email"
+                        >
+                          Not provided
+                        </dd>
+                      </div>
+                      <div class="a11y-form-wizard__review-row">
+                        <dt class="a11y-form-wizard__review-term">
+                          Best contact time
+                        </dt>
+                        <dd
+                          class="a11y-form-wizard__review-value"
+                          data-a11y-form-wizard-review-value="contact_time"
+                        >
+                          No preference
+                        </dd>
+                      </div>
+                    </dl>
+                    <button
+                      class="a11y-form-wizard__button a11y-form-wizard__button--secondary"
+                      type="button"
+                      data-a11y-form-wizard-edit-step="review-contact-step"
+                      hidden
+                    >
+                      Edit contact details
+                    </button>
+                  </section>
+                </div>
+
+                <div class="a11y-form-wizard__actions">
+                  <button
+                    class="a11y-form-wizard__button a11y-form-wizard__button--secondary"
+                    type="button"
+                    data-a11y-form-wizard-previous
+                  >
+                    Back
+                  </button>
+                  <button
+                    class="a11y-form-wizard__button a11y-form-wizard__button--primary"
+                    type="submit"
+                  >
+                    Submit application
+                  </button>
+                </div>
+
+                <p
+                  class="a11y-form-wizard__success"
+                  data-a11y-form-wizard-success
+                  tabindex="-1"
+                  hidden
+                ></p>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script type="module">
+      import { initA11yFormWizardAll } from "../dist/index.js";
+
+      initA11yFormWizardAll();
+    </script>
+  </body>
+</html>

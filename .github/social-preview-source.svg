@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1280" height="640" viewBox="0 0 1280 640">
+  <rect width="1280" height="640" fill="#031c3d"/>
+  <path d="M0 576C218 502 345 584 570 486V640H0Z" fill="#062750" opacity=".65"/>
+  <rect x="64" y="64" width="8" height="512" rx="4" fill="#19bed2"/>
+  <text x="96" y="122" fill="#9ee9f0" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" letter-spacing="3">VANILLA JS · ACCESSIBLE FORMS</text>
+  <text x="96" y="227" fill="#fffdf7" font-family="Arial, Helvetica, sans-serif" font-size="72" font-weight="700" letter-spacing="-2">A11y Form</text>
+  <text x="96" y="307" fill="#fffdf7" font-family="Arial, Helvetica, sans-serif" font-size="72" font-weight="700" letter-spacing="-2">Wizard</text>
+  <text x="96" y="380" fill="#d9e7f2" font-family="Arial, Helvetica, sans-serif" font-size="28">Progressively enhance semantic forms</text>
+  <text x="96" y="420" fill="#d9e7f2" font-family="Arial, Helvetica, sans-serif" font-size="28">with accessible multistep behavior.</text>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700">
+    <rect x="96" y="480" width="152" height="42" rx="21" fill="#0d3a64" stroke="#3f739c"/>
+    <text x="172" y="507" text-anchor="middle" fill="#dff9fb">REAL CONTROLS</text>
+    <rect x="264" y="480" width="136" height="42" rx="21" fill="#0d3a64" stroke="#3f739c"/>
+    <text x="332" y="507" text-anchor="middle" fill="#dff9fb">LIVE UPDATES</text>
+    <rect x="416" y="480" width="130" height="42" rx="21" fill="#0d3a64" stroke="#3f739c"/>
+    <text x="481" y="507" text-anchor="middle" fill="#dff9fb">FOCUS FLOW</text>
+  </g>
+  <clipPath id="art-clip"><rect x="575" y="76" width="645" height="488" rx="24"/></clipPath>
+  <g clip-path="url(#art-clip)">
+    <image x="420" y="76" width="732" height="488" xlink:href="social-preview-art.png" preserveAspectRatio="xMidYMid slice"/>
+  </g>
+  <rect x="575" y="76" width="645" height="488" rx="24" fill="none" stroke="#2d5d85" stroke-width="2"/>
+  <circle cx="1191" cy="105" r="10" fill="#19bed2"/>
+</svg>

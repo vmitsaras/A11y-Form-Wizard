@@ -1,0 +1,31 @@
+/*
+  A11y Form Wizard mono theme
+*/
+
+.a11y-form-wizard[data-theme="mono"] {
+  color-scheme: light;
+  --afw-text: #111111;
+  --afw-muted: #525252;
+  --afw-subtle: #6b6b6b;
+  --afw-page: #f5f5f2;
+  --afw-surface: #ffffff;
+  --afw-panel: #eeeeea;
+  --afw-choice-surface: #ffffff;
+  --afw-choice-surface-hover: #f0f0ed;
+  --afw-field-surface: #ffffff;
+  --afw-border: #111111;
+  --afw-accent: #111111;
+  --afw-accent-strong: #000000;
+  --afw-accent-contrast: #ffffff;
+  --afw-complete: #333333;
+  --afw-complete-contrast: #ffffff;
+  --afw-complete-surface: #eeeeea;
+  --afw-warning: #5f5f5f;
+  --afw-error: #b00000;
+  --afw-focus: #111111;
+  --afw-mix-light: #ffffff;
+  --afw-shell-background: var(--afw-page);
+  --afw-progress-track: #deded9;
+  --afw-progress-fill: #111111;
+  --afw-choice-checked-surface: #eeeeea;
+}

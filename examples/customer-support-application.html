@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Customer Support Application Demo | A11y Form Wizard</title>
+    <link rel="stylesheet" href="../dist/styles.css" />
+    <link rel="stylesheet" href="../src/themes/a11y-form-wizard-theme-default.css" />
+  <!-- seo-meta:start -->
+    <meta name="description" content="See a realistic customer support application flow built with native controls, clear progress, and accessible multistep form behavior." />
+    <meta name="robots" content="index,follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="A11y Form Wizard" />
+    <meta property="og:title" content="Customer Support Application Demo | A11y Form Wizard" />
+    <meta property="og:description" content="See a realistic customer support application flow built with native controls, clear progress, and accessible multistep form behavior." />
+    <meta property="og:image" content="https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png" />
+    <meta property="og:image:alt" content="A11y Form Wizard accessible multistep form flow illustration" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Customer Support Application Demo | A11y Form Wizard" />
+    <meta name="twitter:description" content="See a realistic customer support application flow built with native controls, clear progress, and accessible multistep form behavior." />
+    <meta name="twitter:image" content="https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png" />
+    <meta name="twitter:image:alt" content="A11y Form Wizard accessible multistep form flow illustration" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "name": "Customer Support Application Demo | A11y Form Wizard",
+      "description": "See a realistic customer support application flow built with native controls, clear progress, and accessible multistep form behavior.",
+      "image": "https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png",
+      "inLanguage": "en",
+      "mainEntity": {
+        "@type": "SoftwareSourceCode",
+        "name": "A11y Form Wizard",
+        "description": "Accessible reusable vanilla JavaScript multistep form wizard.",
+        "codeRepository": "https://github.com/vmitsaras/A11y-Form-Wizard",
+        "programmingLanguage": [
+          "TypeScript",
+          "JavaScript"
+        ],
+        "runtimePlatform": "Browser",
+        "version": "1.0.0",
+        "license": "MIT",
+        "keywords": [
+          "accessibility",
+          "form",
+          "form wizard",
+          "multistep form",
+          "progressive enhancement",
+          "TypeScript",
+          "WCAG"
+        ],
+        "image": "https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png",
+        "creator": {
+          "@type": "Person",
+          "name": "Vasileios Mitsaras",
+          "url": "https://github.com/vmitsaras/",
+          "sameAs": [
+            "https://github.com/vmitsaras/",
+            "https://linkedin.com/in/vasilis-mitsaras"
+          ]
+        },
+        "targetProduct": {
+          "@type": "SoftwareApplication",
+          "name": "Modern web browsers",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Any",
+          "runtimePlatform": "Browser"
+        }
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "A11y Form Wizard",
+      "description": "Accessible reusable vanilla JavaScript multistep form wizard.",
+      "codeRepository": "https://github.com/vmitsaras/A11y-Form-Wizard",
+      "programmingLanguage": [
+        "TypeScript",
+        "JavaScript"
+      ],
+      "runtimePlatform": "Browser",
+      "version": "1.0.0",
+      "license": "MIT",
+      "keywords": [
+        "accessibility",
+        "form",
+        "form wizard",
+        "multistep form",
+        "progressive enhancement",
+        "TypeScript",
+        "WCAG"
+      ],
+      "image": "https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png",
+      "creator": {
+        "@type": "Person",
+        "name": "Vasileios Mitsaras",
+        "url": "https://github.com/vmitsaras/",
+        "sameAs": [
+          "https://github.com/vmitsaras/",
+          "https://linkedin.com/in/vasilis-mitsaras"
+        ]
+      },
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "Modern web browsers",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "runtimePlatform": "Browser"
+      }
+    }
+  ]
+}
+    </script>
+    <!-- seo-meta:end -->
+  </head>
+  <body class="a11y-form-wizard-demo">
+    <main>
+      <section
+        class="a11y-form-wizard"
+        data-a11y-form-wizard
+        data-auto-advance-choice="false"
+        data-prevent-submit="true"
+        aria-labelledby="support-role-title"
+      >
+        <div class="a11y-form-wizard__shell">
+          <div class="a11y-form-wizard__layout">
+            <header class="a11y-form-wizard__header">
+              <p class="a11y-form-wizard__eyebrow">Application</p>
+              <h1 class="a11y-form-wizard__headline" id="support-role-title">
+                Customer Support Specialist
+              </h1>
+              <p class="a11y-form-wizard__lede">
+                Tell us about your support background and how to reach you.
+              </p>
+            </header>
+
+            <form class="a11y-form-wizard__form" action="/api/job-application" method="post">
+              <input type="hidden" name="job_title" value="Customer Support Specialist" />
+              <input type="hidden" name="location" value="Remote - United States" />
+
+              <div class="a11y-form-wizard__progress-wrap" aria-label="Application progress">
+                <progress
+                  class="a11y-form-wizard__progress"
+                  max="3"
+                  value="1"
+                  aria-label="Application progress"
+                  data-a11y-form-wizard-progress
+                ></progress>
+                <p class="a11y-form-wizard__progress-label">
+                  Step
+                  <span data-a11y-form-wizard-current-step>1</span> of
+                  <span data-a11y-form-wizard-total-steps>3</span>
+                </p>
+              </div>
+
+              <div
+                class="a11y-form-wizard__error-summary"
+                data-a11y-form-wizard-error-summary
+                hidden
+              ></div>
+              <div class="a11y-form-wizard__sr-only" data-a11y-form-wizard-live aria-live="polite"></div>
+
+              <fieldset class="a11y-form-wizard__step" data-a11y-form-wizard-step>
+                <legend class="a11y-form-wizard__sr-only">Support channels</legend>
+                <p class="a11y-form-wizard__step-kicker">Step 1</p>
+                <h2 class="a11y-form-wizard__title" data-a11y-form-wizard-step-heading>
+                  Which support channel is your strongest?
+                </h2>
+
+                <div class="a11y-form-wizard__choices">
+                  <label class="a11y-form-wizard__choice">
+                    <input
+                      class="a11y-form-wizard__choice-input"
+                      type="radio"
+                      name="strongest_channel"
+                      value="Email and tickets"
+                      data-a11y-form-wizard-choice-input
+                      required
+                    />
+                    <span class="a11y-form-wizard__choice-text">
+                      <span class="a11y-form-wizard__choice-label">Email and tickets</span>
+                      <span class="a11y-form-wizard__choice-description">
+                        Written support, prioritization, and case follow-up.
+                      </span>
+                    </span>
+                  </label>
+
+                  <label class="a11y-form-wizard__choice">
+                    <input
+                      class="a11y-form-wizard__choice-input"
+                      type="radio"
+                      name="strongest_channel"
+                      value="Phone support"
+                      data-a11y-form-wizard-choice-input
+                      required
+                    />
+                    <span class="a11y-form-wizard__choice-text">
+                      <span class="a11y-form-wizard__choice-label">Phone support</span>
+                      <span class="a11y-form-wizard__choice-description">
+                        Live conversations, de-escalation, and quick resolution.
+                      </span>
+                    </span>
+                  </label>
+
+                  <label class="a11y-form-wizard__choice">
+                    <input
+                      class="a11y-form-wizard__choice-input"
+                      type="radio"
+                      name="strongest_channel"
+                      value="Live chat"
+                      data-a11y-form-wizard-choice-input
+                      required
+                    />
+                    <span class="a11y-form-wizard__choice-text">
+                      <span class="a11y-form-wizard__choice-label">Live chat</span>
+                      <span class="a11y-form-wizard__choice-description">
+                        Fast written conversations across multiple customers.
+                      </span>
+                    </span>
+                  </label>
+                </div>
+
+                <div class="a11y-form-wizard__actions">
+                  <button
+                    class="a11y-form-wizard__button a11y-form-wizard__button--primary"
+                    type="button"
+                    data-a11y-form-wizard-next
+                  >
+                    Continue
+                  </button>
+                </div>
+              </fieldset>
+
+              <fieldset class="a11y-form-wizard__step" data-a11y-form-wizard-step>
+                <legend class="a11y-form-wizard__sr-only">Availability</legend>
+                <p class="a11y-form-wizard__step-kicker">Step 2</p>
+                <h2 class="a11y-form-wizard__title" data-a11y-form-wizard-step-heading>
+                  When could you start?
+                </h2>
+
+                <div class="a11y-form-wizard__choices">
+                  <label class="a11y-form-wizard__choice">
+                    <input
+                      class="a11y-form-wizard__choice-input"
+                      type="radio"
+                      name="start_date"
+                      value="Immediately"
+                      data-a11y-form-wizard-choice-input
+                      required
+                    />
+                    <span class="a11y-form-wizard__choice-text">
+                      <span class="a11y-form-wizard__choice-label">Immediately</span>
+                      <span class="a11y-form-wizard__choice-description">
+                        I am available now or within one week.
+                      </span>
+                    </span>
+                  </label>
+
+                  <label class="a11y-form-wizard__choice">
+                    <input
+                      class="a11y-form-wizard__choice-input"
+                      type="radio"
+                      name="start_date"
+                      value="Two to four weeks"
+                      data-a11y-form-wizard-choice-input
+                      required
+                    />
+                    <span class="a11y-form-wizard__choice-text">
+                      <span class="a11y-form-wizard__choice-label">Two to four weeks</span>
+                      <span class="a11y-form-wizard__choice-description">
+                        I need to finish a notice period or current project.
+                      </span>
+                    </span>
+                  </label>
+
+                  <label class="a11y-form-wizard__choice">
+                    <input
+                      class="a11y-form-wizard__choice-input"
+                      type="radio"
+                      name="start_date"
+                      value="More than four weeks"
+                      data-a11y-form-wizard-choice-input
+                      required
+                    />
+                    <span class="a11y-form-wizard__choice-text">
+                      <span class="a11y-form-wizard__choice-label">More than four weeks</span>
+                      <span class="a11y-form-wizard__choice-description">
+                        I am planning ahead for my next role.
+                      </span>
+                    </span>
+                  </label>
+                </div>
+
+                <div class="a11y-form-wizard__actions">
+                  <button
+                    class="a11y-form-wizard__button a11y-form-wizard__button--secondary"
+                    type="button"
+                    data-a11y-form-wizard-previous
+                  >
+                    Back
+                  </button>
+                  <button
+                    class="a11y-form-wizard__button a11y-form-wizard__button--primary"
+                    type="button"
+                    data-a11y-form-wizard-next
+                  >
+                    Continue
+                  </button>
+                </div>
+              </fieldset>
+
+              <fieldset
+                class="a11y-form-wizard__step"
+                data-a11y-form-wizard-step
+                data-a11y-form-wizard-auto-advance="false"
+              >
+                <legend class="a11y-form-wizard__sr-only">Contact details</legend>
+                <p class="a11y-form-wizard__step-kicker">Step 3</p>
+                <h2 class="a11y-form-wizard__title" data-a11y-form-wizard-step-heading>
+                  How can we contact you?
+                </h2>
+
+                <div class="a11y-form-wizard__fields">
+                  <div class="a11y-form-wizard__field">
+                    <label class="a11y-form-wizard__field-label" for="support-name">
+                      Full name
+                    </label>
+                    <div class="a11y-form-wizard__field-shell">
+                      <input
+                        class="a11y-form-wizard__input"
+                        id="support-name"
+                        name="full_name"
+                        type="text"
+                        autocomplete="name"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div class="a11y-form-wizard__field">
+                    <label class="a11y-form-wizard__field-label" for="support-email">
+                      Email address
+                    </label>
+                    <div class="a11y-form-wizard__field-shell">
+                      <input
+                        class="a11y-form-wizard__input"
+                        id="support-email"
+                        name="email"
+                        type="email"
+                        autocomplete="email"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="a11y-form-wizard__consents">
+                  <label class="a11y-form-wizard__consent">
+                    <input
+                      class="a11y-form-wizard__checkbox"
+                      type="checkbox"
+                      name="privacy_accepted"
+                      value="yes"
+                      required
+                    />
+                    <span>I agree to be contacted about this role.</span>
+                  </label>
+                </div>
+
+                <div class="a11y-form-wizard__actions">
+                  <button
+                    class="a11y-form-wizard__button a11y-form-wizard__button--secondary"
+                    type="button"
+                    data-a11y-form-wizard-previous
+                  >
+                    Back
+                  </button>
+                  <button
+                    class="a11y-form-wizard__button a11y-form-wizard__button--primary"
+                    type="submit"
+                  >
+                    Apply now
+                  </button>
+                </div>
+
+                <p
+                  class="a11y-form-wizard__success"
+                  data-a11y-form-wizard-success
+                  tabindex="-1"
+                  hidden
+                ></p>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script type="module">
+      import { initA11yFormWizardAll } from '../dist/index.js';
+
+      initA11yFormWizardAll();
+    </script>
+  </body>
+</html>

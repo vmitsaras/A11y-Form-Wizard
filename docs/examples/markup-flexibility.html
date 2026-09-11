@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Flexible Form Markup Demo | A11y Form Wizard</title>
+    <link rel="stylesheet" href="../dist/styles.css" />
+    <link rel="stylesheet" href="../assets/themes/a11y-form-wizard-theme-default.css" />
+    <link rel="stylesheet" href="../assets/themes/a11y-form-wizard-theme-amber.css" />
+    <link rel="stylesheet" href="../assets/themes/a11y-form-wizard-theme-mono.css" />
+    <link rel="stylesheet" href="../assets/themes/a11y-form-wizard-theme-rose.css" />
+    <link rel="stylesheet" href="../assets/themes/a11y-form-wizard-theme-sage.css" />
+    <style>
+      .markup-flex-page {
+        background: #f8fafc;
+        color: #111827;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        line-height: 1.5;
+        margin: 0;
+      }
+
+      .markup-flex-page *,
+      .markup-flex-page *::before,
+      .markup-flex-page *::after {
+        box-sizing: border-box;
+      }
+
+      .markup-flex {
+        display: grid;
+        gap: clamp(2rem, 5vw, 4rem);
+        margin-inline: auto;
+        max-inline-size: 76rem;
+        padding: clamp(1rem, 4vw, 2rem);
+      }
+
+      .markup-flex__header,
+      .markup-flex__section {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .markup-flex__title {
+        font-size: clamp(2rem, 7vw, 3.5rem);
+        line-height: 1.05;
+        margin: 0;
+      }
+
+      .markup-flex__lede {
+        color: #475569;
+        font-size: 1.05rem;
+        margin: 0;
+        max-inline-size: 56rem;
+      }
+
+      .markup-flex__section h2 {
+        font-size: 1.25rem;
+        margin: 0;
+      }
+
+      .markup-flex__plain {
+        background: #ffffff;
+        border: 0.0625rem solid #cbd5e1;
+        padding: 1rem;
+      }
+
+      .markup-flex__plain form,
+      .markup-flex__plain fieldset {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .markup-flex__plain fieldset {
+        border: 0.125rem solid #cbd5e1;
+        margin: 0;
+        padding: 1rem;
+      }
+
+      .markup-flex__plain label {
+        display: grid;
+        gap: 0.35rem;
+      }
+    </style>
+  <!-- seo-meta:start -->
+    <meta name="description" content="Compare markup patterns that work with A11y Form Wizard while preserving native controls, labels, fieldsets, and accessible interaction." />
+    <meta name="robots" content="index,follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="A11y Form Wizard" />
+    <meta property="og:title" content="Flexible Form Markup Demo | A11y Form Wizard" />
+    <meta property="og:description" content="Compare markup patterns that work with A11y Form Wizard while preserving native controls, labels, fieldsets, and accessible interaction." />
+    <meta property="og:image" content="https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png" />
+    <meta property="og:image:alt" content="A11y Form Wizard accessible multistep form flow illustration" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Flexible Form Markup Demo | A11y Form Wizard" />
+    <meta name="twitter:description" content="Compare markup patterns that work with A11y Form Wizard while preserving native controls, labels, fieldsets, and accessible interaction." />
+    <meta name="twitter:image" content="https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png" />
+    <meta name="twitter:image:alt" content="A11y Form Wizard accessible multistep form flow illustration" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "name": "Flexible Form Markup Demo | A11y Form Wizard",
+      "description": "Compare markup patterns that work with A11y Form Wizard while preserving native controls, labels, fieldsets, and accessible interaction.",
+      "image": "https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png",
+      "inLanguage": "en",
+      "mainEntity": {
+        "@type": "SoftwareSourceCode",
+        "name": "A11y Form Wizard",
+        "description": "Accessible reusable vanilla JavaScript multistep form wizard.",
+        "codeRepository": "https://github.com/vmitsaras/A11y-Form-Wizard",
+        "programmingLanguage": [
+          "TypeScript",
+          "JavaScript"
+        ],
+        "runtimePlatform": "Browser",
+        "version": "1.0.0",
+        "license": "MIT",
+        "keywords": [
+          "accessibility",
+          "form",
+          "form wizard",
+          "multistep form",
+          "progressive enhancement",
+          "TypeScript",
+          "WCAG"
+        ],
+        "image": "https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png",
+        "creator": {
+          "@type": "Person",
+          "name": "Vasileios Mitsaras",
+          "url": "https://github.com/vmitsaras/",
+          "sameAs": [
+            "https://github.com/vmitsaras/",
+            "https://linkedin.com/in/vasilis-mitsaras"
+          ]
+        },
+        "targetProduct": {
+          "@type": "SoftwareApplication",
+          "name": "Modern web browsers",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Any",
+          "runtimePlatform": "Browser"
+        }
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "A11y Form Wizard",
+      "description": "Accessible reusable vanilla JavaScript multistep form wizard.",
+      "codeRepository": "https://github.com/vmitsaras/A11y-Form-Wizard",
+      "programmingLanguage": [
+        "TypeScript",
+        "JavaScript"
+      ],
+      "runtimePlatform": "Browser",
+      "version": "1.0.0",
+      "license": "MIT",
+      "keywords": [
+        "accessibility",
+        "form",
+        "form wizard",
+        "multistep form",
+        "progressive enhancement",
+        "TypeScript",
+        "WCAG"
+      ],
+      "image": "https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png",
+      "creator": {
+        "@type": "Person",
+        "name": "Vasileios Mitsaras",
+        "url": "https://github.com/vmitsaras/",
+        "sameAs": [
+          "https://github.com/vmitsaras/",
+          "https://linkedin.com/in/vasilis-mitsaras"
+        ]
+      },
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "Modern web browsers",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "runtimePlatform": "Browser"
+      }
+    }
+  ]
+}
+    </script>
+    <!-- seo-meta:end -->
+  </head>
+  <body class="markup-flex-page">
+    <main class="markup-flex">
+      <header class="markup-flex__header">
+        <h1 class="markup-flex__title">Markup flexibility</h1>
+        <p class="markup-flex__lede">
+          The JavaScript reads data hooks and native form semantics. BEM classes are available for the default styling layer.
+        </p>
+      </header>
+
+      <section class="markup-flex__section" aria-labelledby="full-bem-title">
+        <h2 id="full-bem-title">Full BEM markup</h2>
+        <section
+          class="a11y-form-wizard"
+          data-a11y-form-wizard
+          data-theme="default"
+          data-skin="bento"
+          data-auto-advance-choice="false"
+          data-prevent-submit="true"
+          aria-labelledby="full-bem-wizard-title"
+        >
+          <div class="a11y-form-wizard__shell">
+            <div class="a11y-form-wizard__layout">
+              <header class="a11y-form-wizard__header">
+                <p class="a11y-form-wizard__eyebrow">BEM</p>
+                <h3 class="a11y-form-wizard__headline" id="full-bem-wizard-title">Styled intake</h3>
+              </header>
+              <form class="a11y-form-wizard__form" action="/api/flex" method="post">
+                <div class="a11y-form-wizard__progress-wrap" aria-label="Styled intake progress">
+                  <progress class="a11y-form-wizard__progress" max="2" value="1" aria-label="Styled intake progress" data-a11y-form-wizard-progress></progress>
+                  <p class="a11y-form-wizard__progress-label">
+                    Step <span data-a11y-form-wizard-current-step>1</span> of
+                    <span data-a11y-form-wizard-total-steps>2</span>
+                  </p>
+                </div>
+                <div class="a11y-form-wizard__error-summary" data-a11y-form-wizard-error-summary hidden></div>
+                <div class="a11y-form-wizard__sr-only" data-a11y-form-wizard-live aria-live="polite"></div>
+
+                <fieldset class="a11y-form-wizard__step" data-a11y-form-wizard-step>
+                  <legend class="a11y-form-wizard__sr-only">Request type</legend>
+                  <h4 class="a11y-form-wizard__title" data-a11y-form-wizard-step-heading>
+                    What do you want to build?
+                  </h4>
+                  <div class="a11y-form-wizard__choices">
+                    <label class="a11y-form-wizard__choice">
+                      <input class="a11y-form-wizard__choice-input" type="radio" name="bem_request" value="Wizard" data-a11y-form-wizard-choice-input required />
+                      <span class="a11y-form-wizard__choice-text">
+                        <span class="a11y-form-wizard__choice-label">Wizard</span>
+                        <span class="a11y-form-wizard__choice-description">A short guided flow.</span>
+                      </span>
+                    </label>
+                    <label class="a11y-form-wizard__choice">
+                      <input class="a11y-form-wizard__choice-input" type="radio" name="bem_request" value="Survey" data-a11y-form-wizard-choice-input required />
+                      <span class="a11y-form-wizard__choice-text">
+                        <span class="a11y-form-wizard__choice-label">Survey</span>
+                        <span class="a11y-form-wizard__choice-description">A longer question set.</span>
+                      </span>
+                    </label>
+                  </div>
+                  <div class="a11y-form-wizard__actions">
+                    <button class="a11y-form-wizard__button a11y-form-wizard__button--primary" type="button" data-a11y-form-wizard-next>
+                      Continue
+                    </button>
+                  </div>
+                </fieldset>
+
+                <fieldset class="a11y-form-wizard__step" data-a11y-form-wizard-step>
+                  <legend class="a11y-form-wizard__sr-only">Contact</legend>
+                  <h4 class="a11y-form-wizard__title" data-a11y-form-wizard-step-heading>
+                    Where should we reply?
+                  </h4>
+                  <div class="a11y-form-wizard__field">
+                    <label class="a11y-form-wizard__field-label" for="bem-email">Email</label>
+                    <div class="a11y-form-wizard__field-shell">
+                      <input class="a11y-form-wizard__input" id="bem-email" name="bem_email" type="email" required />
+                    </div>
+                  </div>
+                  <div class="a11y-form-wizard__actions">
+                    <button class="a11y-form-wizard__button a11y-form-wizard__button--secondary" type="button" data-a11y-form-wizard-previous>
+                      Back
+                    </button>
+                    <button class="a11y-form-wizard__button a11y-form-wizard__button--primary" type="submit">
+                      Submit
+                    </button>
+                  </div>
+                  <p class="a11y-form-wizard__success" data-a11y-form-wizard-success tabindex="-1" hidden></p>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="markup-flex__section" aria-labelledby="minimal-title">
+        <h2 id="minimal-title">Minimal semantic markup</h2>
+        <section class="a11y-form-wizard markup-flex__plain" data-a11y-form-wizard data-prevent-submit="true" aria-labelledby="minimal-wizard-title">
+          <h3 id="minimal-wizard-title">Classless eligibility check</h3>
+          <form action="/api/flex" method="post">
+            <progress max="2" value="1" aria-label="Eligibility progress" data-a11y-form-wizard-progress></progress>
+            <p>Step <span data-a11y-form-wizard-current-step>1</span> of <span data-a11y-form-wizard-total-steps>2</span></p>
+            <div data-a11y-form-wizard-error-summary hidden></div>
+            <div data-a11y-form-wizard-live aria-live="polite"></div>
+
+            <fieldset data-a11y-form-wizard-step>
+              <legend>Eligibility</legend>
+              <label data-a11y-form-wizard-error-container>
+                <input type="radio" name="minimal_ready" value="yes" data-a11y-form-wizard-choice-input required />
+                Yes, I am ready
+              </label>
+              <label data-a11y-form-wizard-error-container>
+                <input type="radio" name="minimal_ready" value="no" data-a11y-form-wizard-choice-input required />
+                Not yet
+              </label>
+              <button type="button" data-a11y-form-wizard-next>Continue</button>
+            </fieldset>
+
+            <fieldset data-a11y-form-wizard-step>
+              <legend>Contact</legend>
+              <label data-a11y-form-wizard-error-container>
+                Email
+                <input name="minimal_email" type="email" required />
+              </label>
+              <button type="button" data-a11y-form-wizard-previous>Back</button>
+              <button type="submit">Submit</button>
+              <p data-a11y-form-wizard-success tabindex="-1" hidden></p>
+            </fieldset>
+          </form>
+        </section>
+      </section>
+
+      <section class="markup-flex__section" aria-labelledby="split-title">
+        <h2 id="split-title">Split layout slots</h2>
+        <section
+          class="a11y-form-wizard"
+          data-a11y-form-wizard
+          data-theme="rose"
+          data-skin="editorial-split"
+          data-density="spacious"
+          data-auto-advance-choice="false"
+          data-prevent-submit="true"
+          aria-labelledby="split-wizard-title"
+        >
+          <div class="a11y-form-wizard__shell">
+            <div class="a11y-form-wizard__layout">
+              <aside class="a11y-form-wizard__aside">
+                <p class="a11y-form-wizard__badge">Optional aside</p>
+                <h3 class="a11y-form-wizard__headline" id="split-wizard-title">Brand-led flow</h3>
+                <p class="a11y-form-wizard__lede">The aside is only a styling slot. JS ignores it.</p>
+              </aside>
+              <div class="a11y-form-wizard__main">
+                <form class="a11y-form-wizard__form" action="/api/flex" method="post">
+                  <div class="a11y-form-wizard__progress-wrap">
+                    <progress class="a11y-form-wizard__progress" max="2" value="1" aria-label="Split progress" data-a11y-form-wizard-progress></progress>
+                    <p class="a11y-form-wizard__progress-label">
+                      Step <span data-a11y-form-wizard-current-step>1</span> of
+                      <span data-a11y-form-wizard-total-steps>2</span>
+                    </p>
+                  </div>
+                  <div class="a11y-form-wizard__error-summary" data-a11y-form-wizard-error-summary hidden></div>
+                  <div class="a11y-form-wizard__sr-only" data-a11y-form-wizard-live aria-live="polite"></div>
+                  <fieldset class="a11y-form-wizard__step" data-a11y-form-wizard-step>
+                    <legend>Preference</legend>
+                    <div class="a11y-form-wizard__choices">
+                      <label class="a11y-form-wizard__choice" data-a11y-form-wizard-error-container>
+                        <input class="a11y-form-wizard__choice-input" type="radio" name="split_pref" value="design" data-a11y-form-wizard-choice-input required />
+                        <span class="a11y-form-wizard__choice-text">
+                          <span class="a11y-form-wizard__choice-label">Design support</span>
+                          <span class="a11y-form-wizard__choice-meta">Visual slot example</span>
+                        </span>
+                      </label>
+                      <label class="a11y-form-wizard__choice" data-a11y-form-wizard-error-container>
+                        <input class="a11y-form-wizard__choice-input" type="radio" name="split_pref" value="engineering" data-a11y-form-wizard-choice-input required />
+                        <span class="a11y-form-wizard__choice-text">
+                          <span class="a11y-form-wizard__choice-label">Engineering support</span>
+                          <span class="a11y-form-wizard__choice-meta">Same JS contract</span>
+                        </span>
+                      </label>
+                    </div>
+                    <div class="a11y-form-wizard__actions">
+                      <button class="a11y-form-wizard__button a11y-form-wizard__button--primary" type="button" data-a11y-form-wizard-next>Continue</button>
+                    </div>
+                  </fieldset>
+                  <fieldset class="a11y-form-wizard__step" data-a11y-form-wizard-step>
+                    <legend>Contact</legend>
+                    <h4 class="a11y-form-wizard__title" data-a11y-form-wizard-step-heading>Contact details</h4>
+                    <div class="a11y-form-wizard__field" data-a11y-form-wizard-error-container>
+                      <label class="a11y-form-wizard__field-label" for="split-email">Email</label>
+                      <div class="a11y-form-wizard__field-shell">
+                        <input class="a11y-form-wizard__input" id="split-email" name="split_email" type="email" required />
+                      </div>
+                    </div>
+                    <div class="a11y-form-wizard__actions">
+                      <button class="a11y-form-wizard__button a11y-form-wizard__button--secondary" type="button" data-a11y-form-wizard-previous>Back</button>
+                      <button class="a11y-form-wizard__button a11y-form-wizard__button--primary" type="submit">Submit</button>
+                    </div>
+                    <p class="a11y-form-wizard__success" data-a11y-form-wizard-success tabindex="-1" hidden></p>
+                  </fieldset>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="markup-flex__section" aria-labelledby="timeline-title">
+        <h2 id="timeline-title">Stacked timeline</h2>
+        <section
+          class="a11y-form-wizard"
+          data-a11y-form-wizard
+          data-theme="mono"
+          data-skin="timeline"
+          data-display-mode="stacked"
+          data-auto-advance-choice="false"
+          data-prevent-submit="true"
+          aria-labelledby="timeline-wizard-title"
+        >
+          <div class="a11y-form-wizard__shell">
+            <div class="a11y-form-wizard__layout">
+              <header class="a11y-form-wizard__header">
+                <h3 class="a11y-form-wizard__headline" id="timeline-wizard-title">Process tracker</h3>
+              </header>
+              <form class="a11y-form-wizard__form" action="/api/flex" method="post">
+                <div class="a11y-form-wizard__progress-wrap">
+                  <ol class="a11y-form-wizard__progress-list" aria-label="Progress">
+                    <li class="a11y-form-wizard__progress-item" data-a11y-form-wizard-progress-item>Plan</li>
+                    <li class="a11y-form-wizard__progress-item" data-a11y-form-wizard-progress-item>Details</li>
+                  </ol>
+                  <p class="a11y-form-wizard__progress-label">
+                    Step <span data-a11y-form-wizard-current-step>1</span> of
+                    <span data-a11y-form-wizard-total-steps>2</span>
+                  </p>
+                </div>
+                <div class="a11y-form-wizard__error-summary" data-a11y-form-wizard-error-summary hidden></div>
+                <div class="a11y-form-wizard__sr-only" data-a11y-form-wizard-live aria-live="polite"></div>
+
+                <fieldset class="a11y-form-wizard__step" data-a11y-form-wizard-step data-a11y-form-wizard-step-name="Plan">
+                  <legend class="a11y-form-wizard__sr-only">Plan</legend>
+                  <h4 class="a11y-form-wizard__step-toggle-heading">
+                    <button class="a11y-form-wizard__step-toggle" type="button" data-a11y-form-wizard-step-trigger>
+                      <span class="a11y-form-wizard__step-number" aria-hidden="true">1</span>
+                      <span class="a11y-form-wizard__step-toggle-text">
+                        <span class="a11y-form-wizard__step-name">Plan</span>
+                        <span class="a11y-form-wizard__step-summary">Pick the first branch.</span>
+                      </span>
+                      <span class="a11y-form-wizard__step-status" data-a11y-form-wizard-step-status></span>
+                    </button>
+                  </h4>
+                  <div class="a11y-form-wizard__step-panel" data-a11y-form-wizard-step-panel>
+                    <h5 class="a11y-form-wizard__title" data-a11y-form-wizard-step-heading>Which plan fits?</h5>
+                    <div class="a11y-form-wizard__choices">
+                      <label class="a11y-form-wizard__choice">
+                        <input class="a11y-form-wizard__choice-input" type="radio" name="timeline_plan" value="Small" data-a11y-form-wizard-choice-input required />
+                        <span class="a11y-form-wizard__choice-text">
+                          <span class="a11y-form-wizard__choice-label">Small</span>
+                        </span>
+                      </label>
+                      <label class="a11y-form-wizard__choice">
+                        <input class="a11y-form-wizard__choice-input" type="radio" name="timeline_plan" value="Large" data-a11y-form-wizard-choice-input required />
+                        <span class="a11y-form-wizard__choice-text">
+                          <span class="a11y-form-wizard__choice-label">Large</span>
+                        </span>
+                      </label>
+                    </div>
+                    <div class="a11y-form-wizard__actions">
+                      <button class="a11y-form-wizard__button a11y-form-wizard__button--primary" type="button" data-a11y-form-wizard-next>Continue</button>
+                    </div>
+                  </div>
+                </fieldset>
+
+                <fieldset class="a11y-form-wizard__step" data-a11y-form-wizard-step data-a11y-form-wizard-step-name="Details">
+                  <legend class="a11y-form-wizard__sr-only">Details</legend>
+                  <h4 class="a11y-form-wizard__step-toggle-heading">
+                    <button class="a11y-form-wizard__step-toggle" type="button" data-a11y-form-wizard-step-trigger>
+                      <span class="a11y-form-wizard__step-number" aria-hidden="true">2</span>
+                      <span class="a11y-form-wizard__step-toggle-text">
+                        <span class="a11y-form-wizard__step-name">Details</span>
+                        <span class="a11y-form-wizard__step-summary">Complete the flow.</span>
+                      </span>
+                      <span class="a11y-form-wizard__step-status" data-a11y-form-wizard-step-status></span>
+                    </button>
+                  </h4>
+                  <div class="a11y-form-wizard__step-panel" data-a11y-form-wizard-step-panel>
+                    <h5 class="a11y-form-wizard__title" data-a11y-form-wizard-step-heading>Where should updates go?</h5>
+                    <div class="a11y-form-wizard__field">
+                      <label class="a11y-form-wizard__field-label" for="timeline-email">Email</label>
+                      <div class="a11y-form-wizard__field-shell">
+                        <input class="a11y-form-wizard__input" id="timeline-email" name="timeline_email" type="email" required />
+                      </div>
+                    </div>
+                    <div class="a11y-form-wizard__actions">
+                      <button class="a11y-form-wizard__button a11y-form-wizard__button--secondary" type="button" data-a11y-form-wizard-previous>Back</button>
+                      <button class="a11y-form-wizard__button a11y-form-wizard__button--primary" type="submit">Submit</button>
+                    </div>
+                    <p class="a11y-form-wizard__success" data-a11y-form-wizard-success tabindex="-1" hidden></p>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="markup-flex__section" aria-labelledby="compact-job-title">
+        <h2 id="compact-job-title">Compact job application</h2>
+        <section
+          class="a11y-form-wizard"
+          data-a11y-form-wizard
+          data-theme="amber"
+          data-skin="receipt"
+          data-auto-advance-choice="false"
+          data-prevent-submit="true"
+          data-completed-message="Thanks. Your application has been saved."
+          aria-labelledby="compact-job-wizard-title"
+        >
+          <div class="a11y-form-wizard__shell">
+            <div class="a11y-form-wizard__layout">
+              <header class="a11y-form-wizard__header">
+                <p class="a11y-form-wizard__eyebrow">Application</p>
+                <h3 class="a11y-form-wizard__headline" id="compact-job-wizard-title">Quick application</h3>
+              </header>
+              <form class="a11y-form-wizard__form" action="/api/application" method="post">
+                <div class="a11y-form-wizard__progress-wrap">
+                  <progress class="a11y-form-wizard__progress" max="2" value="1" aria-label="Application progress" data-a11y-form-wizard-progress></progress>
+                  <p class="a11y-form-wizard__progress-label">
+                    Step <span data-a11y-form-wizard-current-step>1</span> of
+                    <span data-a11y-form-wizard-total-steps>2</span>
+                  </p>
+                </div>
+                <div class="a11y-form-wizard__error-summary" data-a11y-form-wizard-error-summary hidden></div>
+                <div class="a11y-form-wizard__sr-only" data-a11y-form-wizard-live aria-live="polite"></div>
+                <fieldset class="a11y-form-wizard__step" data-a11y-form-wizard-step>
+                  <legend>Qualification</legend>
+                  <div class="a11y-form-wizard__choices">
+                    <label class="a11y-form-wizard__choice" data-a11y-form-wizard-error-container>
+                      <input class="a11y-form-wizard__choice-input" type="radio" name="compact_job_qualification" value="Service" data-a11y-form-wizard-choice-input required />
+                      <span class="a11y-form-wizard__choice-text">
+                        <span class="a11y-form-wizard__choice-label">Service</span>
+                      </span>
+                    </label>
+                    <label class="a11y-form-wizard__choice" data-a11y-form-wizard-error-container>
+                      <input class="a11y-form-wizard__choice-input" type="radio" name="compact_job_qualification" value="Sales" data-a11y-form-wizard-choice-input required />
+                      <span class="a11y-form-wizard__choice-text">
+                        <span class="a11y-form-wizard__choice-label">Sales</span>
+                      </span>
+                    </label>
+                  </div>
+                  <div class="a11y-form-wizard__actions">
+                    <button class="a11y-form-wizard__button a11y-form-wizard__button--primary" type="button" data-a11y-form-wizard-next>Continue</button>
+                  </div>
+                </fieldset>
+                <fieldset class="a11y-form-wizard__step" data-a11y-form-wizard-step>
+                  <legend>Contact</legend>
+                  <div class="a11y-form-wizard__field" data-a11y-form-wizard-error-container>
+                    <label class="a11y-form-wizard__field-label" for="compact-job-email">Email</label>
+                    <div class="a11y-form-wizard__field-shell">
+                      <input class="a11y-form-wizard__input" id="compact-job-email" name="compact_job_email" type="email" required />
+                    </div>
+                  </div>
+                  <div class="a11y-form-wizard__actions">
+                    <button class="a11y-form-wizard__button a11y-form-wizard__button--secondary" type="button" data-a11y-form-wizard-previous>Back</button>
+                    <button class="a11y-form-wizard__button a11y-form-wizard__button--primary" type="submit">Submit</button>
+                  </div>
+                  <p class="a11y-form-wizard__success" data-a11y-form-wizard-success tabindex="-1" hidden></p>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script type="module">
+      import { initA11yFormWizardAll } from '../dist/index.js';
+
+      initA11yFormWizardAll();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Async Validation Demo | A11y Form Wizard</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="../dist/styles.css" />
+    <style>
+      :root { color-scheme: light; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body { background: #eef2f7; color: #111827; line-height: 1.55; margin: 0; }
+      a { color: #1d4ed8; font-weight: 700; text-underline-offset: 0.18em; }
+      :focus-visible { outline: 0.1875rem solid #111827; outline-offset: 0.1875rem; }
+      .lab-skip-link { background: #111827; color: #fff; inset-block-start: 0.75rem; inset-inline-start: 0.75rem; padding: 0.75rem 1rem; position: fixed; transform: translateY(-200%); z-index: 10; }
+      .lab-skip-link:focus { transform: translateY(0); }
+      .lab-header, .lab-main, .lab-footer { inline-size: min(100% - 2rem, 88rem); margin-inline: auto; }
+      .lab-header { padding-block: clamp(2.5rem, 8vw, 5rem) 2rem; }
+      .lab-eyebrow, .lab-station__number { color: #92400e; font-size: 0.8rem; font-weight: 850; letter-spacing: 0.08em; margin: 0; text-transform: uppercase; }
+      .lab-header h1 { font-size: clamp(2.25rem, 8vw, 4.75rem); letter-spacing: -0.045em; line-height: 0.98; margin: 0.5rem 0 0; max-inline-size: 14ch; }
+      .lab-lede { color: #475569; font-size: 1.1rem; max-inline-size: 64rem; }
+      .lab-nav { display: flex; flex-wrap: wrap; gap: 0.75rem 1.25rem; margin-block-start: 1.5rem; }
+      .lab-layout { align-items: start; display: grid; gap: 1.5rem; }
+      .lab-stations { display: grid; gap: 1.5rem; min-inline-size: 0; }
+      .lab-station, .lab-expectations { background: #fff; border: 0.0625rem solid #cbd5e1; border-radius: 1rem; box-shadow: 0 1rem 2.5rem rgb(15 23 42 / 0.08); min-inline-size: 0; padding: clamp(1rem, 4vw, 2rem); }
+      .lab-station h2, .lab-expectations h2 { font-size: clamp(1.5rem, 4vw, 2.15rem); line-height: 1.12; margin: 0.35rem 0 0.75rem; }
+      .lab-station__goal { color: #475569; margin-block-end: 1.25rem; }
+      .lab-instructions { background: #f8fafc; border-inline-start: 0.25rem solid #2563eb; margin-block: 0 1.5rem; padding: 1rem 1rem 1rem 1.25rem; }
+      .lab-instructions h3 { font-size: 1rem; margin: 0 0 0.4rem; }
+      .lab-instructions ol { margin-block: 0; padding-inline-start: 1.25rem; }
+      .lab-station .a11y-form-wizard { --afw-card-width: 100%; --afw-shadow: none; --afw-form-padding: clamp(1rem, 4vw, 1.5rem); }
+      .lab-station .a11y-form-wizard__form { background: #f8fafc; }
+      .lab-station .a11y-form-wizard__title { font-size: clamp(1.25rem, 4vw, 1.65rem); }
+      .lab-code { border-block-start: 0.0625rem solid #cbd5e1; margin-block-start: 1.5rem; padding-block-start: 1rem; }
+      .lab-code summary { cursor: pointer; font-weight: 800; }
+      .lab-code pre { background: #0f172a; border-radius: 0.65rem; color: #e2e8f0; font-size: 0.82rem; line-height: 1.5; overflow-x: auto; padding: 1rem; }
+      .lab-controls { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-block-start: 1rem; }
+      .lab-button { background: #fff; border: 0.125rem solid #64748b; border-radius: 0.5rem; color: #111827; cursor: pointer; font: inherit; font-weight: 800; min-block-size: 2.75rem; padding: 0.65rem 0.9rem; }
+      .lab-button:hover { border-color: #1d4ed8; }
+      .lab-button[disabled] { cursor: not-allowed; opacity: 0.5; }
+      .lab-status { background: #eff6ff; border: 0.0625rem solid #93c5fd; border-radius: 0.5rem; margin-block: 1rem 0; padding: 0.8rem 1rem; }
+      .lab-table-wrap { max-inline-size: 100%; overflow-x: auto; }
+      .lab-table { border-collapse: collapse; inline-size: 100%; table-layout: fixed; }
+      .lab-table caption { font-weight: 800; padding-block-end: 0.75rem; text-align: start; }
+      .lab-table th, .lab-table td { border-block-start: 0.0625rem solid #cbd5e1; overflow-wrap: anywhere; padding: 0.75rem; text-align: start; vertical-align: top; }
+      .lab-table th { inline-size: 32%; }
+      .lab-caveat { color: #475569; font-size: 0.92rem; }
+      .lab-footer { color: #475569; padding-block: 2rem 3rem; }
+      @media (min-width: 72rem) { .lab-layout { grid-template-columns: minmax(0, 1fr) minmax(20rem, 26rem); } .lab-expectations { inset-block-start: 1rem; position: sticky; } }
+      @media (max-width: 36rem) { .lab-header, .lab-main, .lab-footer { inline-size: min(100% - 1rem, 88rem); } .lab-controls, .a11y-form-wizard__actions { align-items: stretch; flex-direction: column; } .lab-button, .a11y-form-wizard__button { inline-size: 100%; } }
+      @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    </style>
+  <!-- seo-meta:start -->
+    <meta name="description" content="Test native, synchronous, asynchronous, operational-error, and teardown validation states in an accessible multistep form wizard." />
+    <meta name="robots" content="index,follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="A11y Form Wizard" />
+    <meta property="og:title" content="Async Validation Demo | A11y Form Wizard" />
+    <meta property="og:description" content="Test native, synchronous, asynchronous, operational-error, and teardown validation states in an accessible multistep form wizard." />
+    <meta property="og:image" content="https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png" />
+    <meta property="og:image:alt" content="A11y Form Wizard accessible multistep form flow illustration" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Async Validation Demo | A11y Form Wizard" />
+    <meta name="twitter:description" content="Test native, synchronous, asynchronous, operational-error, and teardown validation states in an accessible multistep form wizard." />
+    <meta name="twitter:image" content="https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png" />
+    <meta name="twitter:image:alt" content="A11y Form Wizard accessible multistep form flow illustration" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "name": "Async Validation Demo | A11y Form Wizard",
+      "description": "Test native, synchronous, asynchronous, operational-error, and teardown validation states in an accessible multistep form wizard.",
+      "image": "https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png",
+      "inLanguage": "en",
+      "mainEntity": {
+        "@type": "SoftwareSourceCode",
+        "name": "A11y Form Wizard",
+        "description": "Accessible reusable vanilla JavaScript multistep form wizard.",
+        "codeRepository": "https://github.com/vmitsaras/A11y-Form-Wizard",
+        "programmingLanguage": [
+          "TypeScript",
+          "JavaScript"
+        ],
+        "runtimePlatform": "Browser",
+        "version": "1.0.0",
+        "license": "MIT",
+        "keywords": [
+          "accessibility",
+          "form",
+          "form wizard",
+          "multistep form",
+          "progressive enhancement",
+          "TypeScript",
+          "WCAG"
+        ],
+        "image": "https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png",
+        "creator": {
+          "@type": "Person",
+          "name": "Vasileios Mitsaras",
+          "url": "https://github.com/vmitsaras/",
+          "sameAs": [
+            "https://github.com/vmitsaras/",
+            "https://linkedin.com/in/vasilis-mitsaras"
+          ]
+        },
+        "targetProduct": {
+          "@type": "SoftwareApplication",
+          "name": "Modern web browsers",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Any",
+          "runtimePlatform": "Browser"
+        }
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "A11y Form Wizard",
+      "description": "Accessible reusable vanilla JavaScript multistep form wizard.",
+      "codeRepository": "https://github.com/vmitsaras/A11y-Form-Wizard",
+      "programmingLanguage": [
+        "TypeScript",
+        "JavaScript"
+      ],
+      "runtimePlatform": "Browser",
+      "version": "1.0.0",
+      "license": "MIT",
+      "keywords": [
+        "accessibility",
+        "form",
+        "form wizard",
+        "multistep form",
+        "progressive enhancement",
+        "TypeScript",
+        "WCAG"
+      ],
+      "image": "https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png",
+      "creator": {
+        "@type": "Person",
+        "name": "Vasileios Mitsaras",
+        "url": "https://github.com/vmitsaras/",
+        "sameAs": [
+          "https://github.com/vmitsaras/",
+          "https://linkedin.com/in/vasilis-mitsaras"
+        ]
+      },
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "Modern web browsers",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "runtimePlatform": "Browser"
+      }
+    }
+  ]
+}
+    </script>
+    <!-- seo-meta:end -->
+  </head>
+  <body>
+    <a class="lab-skip-link" href="#lab-main">Skip to the validation stations</a>
+    <header class="lab-header">
+      <p class="lab-eyebrow">Advanced integration demo</p>
+      <h1>Validator integration laboratory</h1>
+      <p class="lab-lede">Compare native constraints, synchronous and asynchronous adapter rules, an operational service failure, and lifecycle-safe teardown. Every failure is a deterministic local fixture; this page sends no data.</p>
+      <nav class="lab-nav" aria-label="Validation laboratory stations">
+        <a href="#native-only">Native-only</a><a href="#sync-rule">Synchronous rule</a><a href="#async-rule">Asynchronous rule</a><a href="#server-error">Server unavailable</a><a href="#teardown">Teardown</a><a href="#screen-reader-expectations">Screen reader expectations</a>
+      </nav>
+    </header>
+
+    <main class="lab-main" id="lab-main">
+      <div class="lab-layout">
+        <div class="lab-stations">
+          <section class="lab-station" id="native-only" aria-labelledby="native-only-title">
+            <p class="lab-station__number">Station 1 · Baseline</p>
+            <h2 id="native-only-title">Native constraints run first</h2>
+            <p class="lab-station__goal">Goal: confirm that an adapter is not required for ordinary required-field and email-format validation.</p>
+            <div class="lab-instructions"><h3>Try it</h3><ol><li>Activate <strong>Continue to confirmation</strong> with the email empty.</li><li>Enter a valid email and continue.</li><li>Submit the prevented demo and inspect the success status.</li></ol></div>
+            <section class="a11y-form-wizard" data-lab-native data-a11y-form-wizard aria-label="Native validation example">
+              <form class="a11y-form-wizard__form" action="/example" method="post">
+                <p class="a11y-form-wizard__progress-label">Step <span data-a11y-form-wizard-current-step>1</span> of <span data-a11y-form-wizard-total-steps>2</span></p>
+                <div id="native-error" class="a11y-form-wizard__error-summary" data-a11y-form-wizard-error-summary hidden></div><div class="a11y-form-wizard__sr-only" data-a11y-form-wizard-live></div>
+                <fieldset class="a11y-form-wizard__step" data-a11y-form-wizard-step><legend>Contact email</legend><h3 class="a11y-form-wizard__title" data-a11y-form-wizard-step-heading>Enter a contact email</h3><div class="a11y-form-wizard__fields"><div class="a11y-form-wizard__field" data-a11y-form-wizard-error-container><label class="a11y-form-wizard__field-label" for="native-email">Email address</label><div class="a11y-form-wizard__field-shell"><input class="a11y-form-wizard__input" id="native-email" name="native_email" type="email" autocomplete="email" required /></div></div></div><div class="a11y-form-wizard__actions"><button class="a11y-form-wizard__button a11y-form-wizard__button--primary" type="button" data-a11y-form-wizard-next>Continue to confirmation</button></div></fieldset>
+                <fieldset class="a11y-form-wizard__step" data-a11y-form-wizard-step><legend>Confirmation</legend><h3 class="a11y-form-wizard__title" data-a11y-form-wizard-step-heading>Native validation passed</h3><p>No adapter ran before this step was revealed.</p><div class="a11y-form-wizard__actions"><button class="a11y-form-wizard__button a11y-form-wizard__button--secondary" type="button" data-a11y-form-wizard-previous>Back</button><button class="a11y-form-wizard__button a11y-form-wizard__button--primary" type="submit">Finish native example</button></div><p class="a11y-form-wizard__success" data-a11y-form-wizard-success tabindex="-1" hidden></p></fieldset>
+              </form>
+            </section>
+            <details class="lab-code"><summary>Copy the native-only initialization</summary><pre><code>createA11yFormWizard(root, {
+  preventSubmit: true
+});</code></pre></details>
+          </section>
+
+          <section class="lab-station" id="sync-rule" aria-labelledby="sync-rule-title">
+            <p class="lab-station__number">Station 2 · Custom rule</p><h2 id="sync-rule-title">Return a synchronous adapter result</h2><p class="lab-station__goal">Goal: demonstrate an immediate business rule after native required validation succeeds.</p>
+            <div class="lab-instructions"><h3>Try it</h3><ol><li>Enter any value except <code>ACCESS-42</code> and continue.</li><li>Confirm the adapter-owned error is associated with and focused on the field.</li><li>Enter <code>ACCESS-42</code> to recover and advance.</li></ol></div>
+            <section class="a11y-form-wizard" data-lab-sync data-a11y-form-wizard aria-label="Synchronous adapter example">
+              <form class="a11y-form-wizard__form" action="/example" method="post">
+                <p class="a11y-form-wizard__progress-label">Step <span data-a11y-form-wizard-current-step>1</span> of <span data-a11y-form-wizard-total-steps>2</span></p><div id="sync-error" class="a11y-form-wizard__error-summary" data-a11y-form-wizard-error-summary hidden></div><div class="a11y-form-wizard__sr-only" data-a11y-form-wizard-live></div>
+                <fieldset class="a11y-form-wizard__step" data-a11y-form-wizard-step><legend>Invitation code</legend><h3 class="a11y-form-wizard__title" data-a11y-form-wizard-step-heading>Check a team invitation code</h3><div class="a11y-form-wizard__fields"><div class="a11y-form-wizard__field" data-a11y-form-wizard-error-container><label class="a11y-form-wizard__field-label" for="sync-code">Invitation code</label><div class="a11y-form-wizard__field-shell"><input class="a11y-form-wizard__input" id="sync-code" name="sync_invite_code" autocomplete="off" required /></div></div></div><div class="a11y-form-wizard__actions"><button class="a11y-form-wizard__button a11y-form-wizard__button--primary" type="button" data-a11y-form-wizard-next>Validate invitation code</button></div></fieldset>
+                <fieldset class="a11y-form-wizard__step" data-a11y-form-wizard-step><legend>Invitation accepted</legend><h3 class="a11y-form-wizard__title" data-a11y-form-wizard-step-heading>The synchronous rule passed</h3><p>The adapter returned <code>{ valid: true }</code> without creating a promise.</p><div class="a11y-form-wizard__actions"><button class="a11y-form-wizard__button a11y-form-wizard__button--secondary" type="button" data-a11y-form-wizard-previous>Back</button><button class="a11y-form-wizard__button a11y-form-wizard__button--primary" type="submit">Finish synchronous example</button></div><p class="a11y-form-wizard__success" data-a11y-form-wizard-success tabindex="-1" hidden></p></fieldset>
+              </form>
+            </section>
+            <details class="lab-code"><summary>Copy the synchronous adapter pattern</summary><pre><code>validationAdapter: {
+  validateStep(context) {
+    return context.data.sync_invite_code === "ACCESS-42"
+      ? { valid: true }
+      : { valid: false, errorTarget: codeInput };
+  },
+  focusError({ result }) {
+    result.errorTarget?.focus();
+  }
+}</code></pre></details>
+          </section>
+
+          <section class="lab-station" id="async-rule" aria-labelledby="async-rule-title">
+            <p class="lab-station__number">Station 3 · Pending state</p><h2 id="async-rule-title">Wait for an asynchronous rule</h2><p class="lab-station__goal">Goal: inspect the stable busy state, duplicate-activation protection, adapter error, and recovery path.</p>
+            <div class="lab-instructions"><h3>Try it</h3><ol><li>Enter <code>taken</code> and activate <strong>Check username</strong> twice.</li><li>Keep focus on the button while its label and busy state change.</li><li>Enter another name to recover; editing during a pending check also aborts it.</li></ol></div>
+            <section class="a11y-form-wizard" data-lab-async data-a11y-form-wizard aria-label="Asynchronous adapter example">
+              <form class="a11y-form-wizard__form" action="/example" method="post">
+                <p class="a11y-form-wizard__progress-label">Step <span data-a11y-form-wizard-current-step>1</span> of <span data-a11y-form-wizard-total-steps>2</span></p><div id="async-error" class="a11y-form-wizard__error-summary" data-a11y-form-wizard-error-summary hidden></div><div class="a11y-form-wizard__sr-only" data-a11y-form-wizard-live></div>
+                <fieldset class="a11y-form-wizard__step" data-a11y-form-wizard-step><legend>Account name</legend><h3 class="a11y-form-wizard__title" data-a11y-form-wizard-step-heading>Choose an available username</h3><div class="a11y-form-wizard__fields"><div class="a11y-form-wizard__field" data-a11y-form-wizard-error-container><label class="a11y-form-wizard__field-label" for="async-username">Username</label><div class="a11y-form-wizard__field-shell"><input class="a11y-form-wizard__input" id="async-username" name="async_username" autocomplete="username" required /></div></div></div><div class="a11y-form-wizard__actions"><button class="a11y-form-wizard__button a11y-form-wizard__button--primary" type="button" data-a11y-form-wizard-next>Check username</button></div></fieldset>
+                <fieldset class="a11y-form-wizard__step" data-a11y-form-wizard-step><legend>Username accepted</legend><h3 class="a11y-form-wizard__title" data-a11y-form-wizard-step-heading>The asynchronous rule passed</h3><p>The local fixture resolved after 700 milliseconds and the current result was still valid.</p><div class="a11y-form-wizard__actions"><button class="a11y-form-wizard__button a11y-form-wizard__button--secondary" type="button" data-a11y-form-wizard-previous>Back</button><button class="a11y-form-wizard__button a11y-form-wizard__button--primary" type="submit">Finish asynchronous example</button></div><p class="a11y-form-wizard__success" data-a11y-form-wizard-success tabindex="-1" hidden></p></fieldset>
+              </form>
+            </section>
+            <details class="lab-code"><summary>Copy the asynchronous adapter pattern</summary><pre><code>validationAdapter: {
+  async validateStep(context) {
+    await waitForFixture(700, context.signal);
+    return context.data.async_username === "taken"
+      ? { valid: false, errorTarget: usernameInput }
+      : { valid: true };
+  }
+}</code></pre></details>
+          </section>
+
+          <section class="lab-station" id="server-error" aria-labelledby="server-error-title">
+            <p class="lab-station__number">Station 4 · Operational failure</p><h2 id="server-error-title">Recover when a service is unavailable</h2><p class="lab-station__goal">Goal: distinguish an adapter rejection from an ordinary invalid result. The wizard owns this generic retry message.</p>
+            <div class="lab-instructions"><h3>Try it</h3><ol><li>Leave <strong>Simulate service unavailable</strong> checked and submit.</li><li>Confirm the generic retry message appears while focus remains on the submit button.</li><li>Uncheck the fixture and retry to reach the prevented-submit success state.</li></ol></div>
+            <section class="a11y-form-wizard" data-lab-server data-a11y-form-wizard aria-label="Operational validation failure example">
+              <form class="a11y-form-wizard__form" action="/example" method="post"><div id="server-error-summary" class="a11y-form-wizard__error-summary" data-a11y-form-wizard-error-summary hidden></div><div class="a11y-form-wizard__sr-only" data-a11y-form-wizard-live></div>
+                <fieldset class="a11y-form-wizard__step" data-a11y-form-wizard-step><legend>Service check</legend><h3 class="a11y-form-wizard__title" data-a11y-form-wizard-step-heading>Validate a request before submission</h3><div class="a11y-form-wizard__fields"><div class="a11y-form-wizard__field" data-a11y-form-wizard-error-container><label class="a11y-form-wizard__field-label" for="server-email">Notification email</label><div class="a11y-form-wizard__field-shell"><input class="a11y-form-wizard__input" id="server-email" name="server_email" type="email" value="alex@example.com" required /></div></div></div><div class="a11y-form-wizard__consents"><label class="a11y-form-wizard__consent"><input class="a11y-form-wizard__checkbox" type="checkbox" data-lab-server-toggle checked /><span>Simulate service unavailable</span></label></div><div class="a11y-form-wizard__actions"><button class="a11y-form-wizard__button a11y-form-wizard__button--primary" type="submit">Validate and submit request</button></div><p class="a11y-form-wizard__success" data-a11y-form-wizard-success tabindex="-1" hidden></p></fieldset>
+              </form>
+            </section>
+            <details class="lab-code"><summary>Copy the operational-failure pattern</summary><pre><code>validationAdapter: {
+  async validateForm(context) {
+    await waitForFixture(500, context.signal);
+    if (serviceUnavailable) {
+      throw new Error("Simulated service unavailable");
+    }
+    return { valid: true };
+  }
+}</code></pre></details>
+          </section>
+
+          <section class="lab-station" id="teardown" aria-labelledby="teardown-title">
+            <p class="lab-station__number">Station 5 · Lifecycle</p><h2 id="teardown-title">Destroy during pending validation</h2><p class="lab-station__goal">Goal: verify that teardown aborts the active signal, runs adapter cleanup, reveals every step, ignores a late result, and permits reinitialization.</p>
+            <div class="lab-instructions"><h3>Try it</h3><ol><li>Enter any project code and activate <strong>Start pending check</strong>.</li><li>Activate <strong>Destroy instance</strong>, then <strong>Resolve stale check</strong>.</li><li>Confirm both steps remain visible and use <strong>Reinitialize instance</strong>.</li></ol></div>
+            <section class="a11y-form-wizard" data-lab-teardown data-a11y-form-wizard aria-label="Validation teardown example">
+              <form class="a11y-form-wizard__form" action="/example" method="post"><p class="a11y-form-wizard__progress-label">Step <span data-a11y-form-wizard-current-step>1</span> of <span data-a11y-form-wizard-total-steps>2</span></p><div id="teardown-error" class="a11y-form-wizard__error-summary" data-a11y-form-wizard-error-summary hidden></div><div class="a11y-form-wizard__sr-only" data-a11y-form-wizard-live></div>
+                <fieldset class="a11y-form-wizard__step" data-a11y-form-wizard-step><legend>Pending project check</legend><h3 class="a11y-form-wizard__title" data-a11y-form-wizard-step-heading>Start a controlled validation</h3><div class="a11y-form-wizard__fields"><div class="a11y-form-wizard__field" data-a11y-form-wizard-error-container><label class="a11y-form-wizard__field-label" for="teardown-code">Project code</label><div class="a11y-form-wizard__field-shell"><input class="a11y-form-wizard__input" id="teardown-code" name="teardown_project_code" value="PROJECT-7" required /></div></div></div><div class="a11y-form-wizard__actions"><button class="a11y-form-wizard__button a11y-form-wizard__button--primary" type="button" data-a11y-form-wizard-next>Start pending check</button></div></fieldset>
+                <fieldset class="a11y-form-wizard__step" data-a11y-form-wizard-step><legend>Late result target</legend><h3 class="a11y-form-wizard__title" data-a11y-form-wizard-step-heading>A current result would reveal this step</h3><p>A stale result must not navigate here after the instance is destroyed.</p><div class="a11y-form-wizard__actions"><button class="a11y-form-wizard__button a11y-form-wizard__button--secondary" type="button" data-a11y-form-wizard-previous>Back</button><button class="a11y-form-wizard__button a11y-form-wizard__button--primary" type="submit">Finish teardown example</button></div><p class="a11y-form-wizard__success" data-a11y-form-wizard-success tabindex="-1" hidden></p></fieldset>
+              </form>
+            </section>
+            <div class="lab-controls" aria-label="Teardown controls"><button class="lab-button" type="button" data-lab-destroy>Destroy instance</button><button class="lab-button" type="button" data-lab-resolve disabled>Resolve stale check</button><button class="lab-button" type="button" data-lab-reinitialize disabled>Reinitialize instance</button></div>
+            <p class="lab-status" data-lab-teardown-status role="status" aria-live="polite">Instance initialized. Adapter reset count: 0.</p>
+            <details class="lab-code"><summary>Copy the teardown pattern</summary><pre><code>const validation = wizard.nextAsync();
+wizard.destroy(); // Aborts context.signal and calls adapter.reset().
+
+lateResult.resolve({ valid: true });
+await validation; // Resolves false; stale UI work is ignored.
+
+wizard = createA11yFormWizard(root, options);</code></pre></details>
+          </section>
+        </div>
+
+        <aside class="lab-expectations" id="screen-reader-expectations" aria-labelledby="screen-reader-title">
+          <p class="lab-eyebrow">Accessibility evidence</p><h2 id="screen-reader-title">Screen reader expectations</h2><p>These are expected DOM, focus, and live-region behaviors—not universal announcements. Verify the final integration with the browser and assistive technology combinations your product supports.</p>
+          <div class="lab-table-wrap"><table class="lab-table"><caption>Expected behavior by validation state</caption><thead><tr><th scope="col">State</th><th scope="col">Expected exposed behavior</th></tr></thead><tbody>
+            <tr><th scope="row">Native invalid</th><td>The dedicated polite live region announces the error count and first error, the visible error summary remains a non-live block, and focus moves to the first invalid control.</td></tr>
+            <tr><th scope="row">Adapter pending</th><td>The form and initiating control expose busy and disabled states, the control keeps its accessible name while a visible “Validating…” label is shown, focus stays in place, and a polite status reports progress.</td></tr>
+            <tr><th scope="row">Adapter invalid</th><td>The adapter owns error markup and announcement; the wizard reveals the target step before calling <code>focusError()</code>.</td></tr>
+            <tr><th scope="row">Operational failure</th><td>The wizard exposes one generic retry message and keeps focus on the initiating control.</td></tr>
+            <tr><th scope="row">Destroy during validation</th><td>The signal aborts, no stale result updates the wizard, all steps become visible, and the laboratory status reports teardown.</td></tr>
+          </tbody></table></div>
+          <p class="lab-caveat">Native constraints always run before adapter rules. Adapter-invalid output belongs to the adapter; rejection, malformed results, and timeout messages belong to the wizard.</p>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="lab-footer"><p>This laboratory uses compiled A11y Form Wizard assets and local fixtures only. <a href="../">Return to the example index</a>.</p></footer>
+    <script type="module">
+      import { createA11yFormWizard } from "../dist/index.js";
+
+      function waitForFixture(milliseconds, signal) {
+        return new Promise((resolve, reject) => {
+          const timer = window.setTimeout(resolve, milliseconds);
+          signal.addEventListener("abort", () => { window.clearTimeout(timer); reject(new DOMException("Validation aborted", "AbortError")); }, { once: true });
+        });
+      }
+
+      function createAdapterErrorPresenter(root) {
+        const summary = root.querySelector("[data-a11y-form-wizard-error-summary]");
+        let currentTarget = null;
+        function clear() {
+          if (currentTarget instanceof HTMLElement) {
+            currentTarget.removeAttribute("aria-invalid"); currentTarget.removeAttribute("aria-describedby");
+            currentTarget.closest("[data-a11y-form-wizard-error-container]")?.classList.remove("has-error");
+          }
+          if (summary instanceof HTMLElement) { summary.hidden = true; summary.textContent = ""; }
+          currentTarget = null;
+        }
+        function show(target, message) {
+          clear();
+          if (!(target instanceof HTMLElement) || !(summary instanceof HTMLElement)) return;
+          currentTarget = target; summary.hidden = false; summary.textContent = message;
+          target.setAttribute("aria-invalid", "true"); target.setAttribute("aria-describedby", summary.id);
+          target.closest("[data-a11y-form-wizard-error-container]")?.classList.add("has-error");
+        }
+        return { clear, show };
+      }
+
+      const nativeRoot = document.querySelector("[data-lab-native]");
+      if (nativeRoot instanceof HTMLElement) createA11yFormWizard(nativeRoot, { preventSubmit: true, completedMessage: "Native validation completed without an adapter." });
+
+      const syncRoot = document.querySelector("[data-lab-sync]");
+      if (syncRoot instanceof HTMLElement) {
+        const codeInput = syncRoot.querySelector("#sync-code"); const errors = createAdapterErrorPresenter(syncRoot);
+        createA11yFormWizard(syncRoot, { preventSubmit: true, completedMessage: "The synchronous adapter example is complete.", validationAdapter: {
+          validateStep(context) { if (String(context.data.sync_invite_code ?? "").toUpperCase() !== "ACCESS-42") { errors.show(codeInput, "Invitation code: Enter ACCESS-42 to continue."); return { valid: false, errorTarget: codeInput }; } errors.clear(); return { valid: true }; },
+          focusError({ result }) { result.errorTarget?.focus(); }, reset() { errors.clear(); }
+        }});
+      }
+
+      const asyncRoot = document.querySelector("[data-lab-async]");
+      if (asyncRoot instanceof HTMLElement) {
+        const usernameInput = asyncRoot.querySelector("#async-username"); const errors = createAdapterErrorPresenter(asyncRoot);
+        createA11yFormWizard(asyncRoot, { preventSubmit: true, completedMessage: "The asynchronous adapter example is complete.", validationAdapter: {
+          timeoutMs: 5_000,
+          async validateStep(context) { await waitForFixture(700, context.signal); if (String(context.data.async_username ?? "").toLowerCase() === "taken") { errors.show(usernameInput, "Username: That name is already taken. Try another name."); return { valid: false, errorTarget: usernameInput }; } errors.clear(); return { valid: true }; },
+          focusError({ result }) { result.errorTarget?.focus(); }, reset() { errors.clear(); }
+        }});
+      }
+
+      const serverRoot = document.querySelector("[data-lab-server]");
+      if (serverRoot instanceof HTMLElement) {
+        const unavailableToggle = serverRoot.querySelector("[data-lab-server-toggle]");
+        createA11yFormWizard(serverRoot, { preventSubmit: true, completedMessage: "The retry succeeded. No request was sent.", validationAdapter: {
+          timeoutMs: 5_000,
+          async validateForm(context) { await waitForFixture(500, context.signal); if (unavailableToggle instanceof HTMLInputElement && unavailableToggle.checked) throw new Error("Simulated service unavailable"); return { valid: true }; }
+        }});
+      }
+
+      const teardownRoot = document.querySelector("[data-lab-teardown]");
+      const destroyButton = document.querySelector("[data-lab-destroy]"); const resolveButton = document.querySelector("[data-lab-resolve]");
+      const reinitializeButton = document.querySelector("[data-lab-reinitialize]"); const teardownStatus = document.querySelector("[data-lab-teardown-status]");
+      if (teardownRoot instanceof HTMLElement && destroyButton instanceof HTMLButtonElement && resolveButton instanceof HTMLButtonElement && reinitializeButton instanceof HTMLButtonElement && teardownStatus instanceof HTMLElement) {
+        let instance = null; let pendingResolve = null; let resetCount = 0; let observedSignal = null;
+        function updateStatus(message) { teardownStatus.textContent = `${message} Adapter reset count: ${resetCount}.`; }
+        function initialize() {
+          instance = createA11yFormWizard(teardownRoot, { preventSubmit: true, completedMessage: "The reinitialized teardown example is complete.", validationAdapter: {
+            validateStep(context) { observedSignal = context.signal; resolveButton.disabled = false; updateStatus("Validation is pending. Destroy the instance before resolving it."); return new Promise((resolve) => { pendingResolve = resolve; }); },
+            reset() { resetCount += 1; updateStatus(observedSignal?.aborted ? "The adapter reset hook ran after its signal was aborted." : "The adapter reset hook ran."); }
+          }});
+          destroyButton.disabled = false; reinitializeButton.disabled = true; updateStatus("Instance initialized.");
+        }
+        destroyButton.addEventListener("click", () => { if (!instance) return; instance.destroy(); instance = null; destroyButton.disabled = true; reinitializeButton.disabled = false; updateStatus(observedSignal?.aborted ? "Instance destroyed; the pending signal is aborted and all steps are revealed." : "Instance destroyed; all steps are revealed."); });
+        resolveButton.addEventListener("click", () => { if (!pendingResolve) return; pendingResolve({ valid: true }); pendingResolve = null; resolveButton.disabled = true; updateStatus(instance ? "The current check resolved." : "The stale check resolved after destroy; the revealed steps remain unchanged."); });
+        reinitializeButton.addEventListener("click", () => { if (!instance) initialize(); });
+        initialize();
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+/*
+  A11y Form Wizard high-contrast theme
+*/
+
+.a11y-form-wizard[data-theme="contrast"] {
+  color-scheme: light;
+  --afw-text: #000000;
+  --afw-muted: #111111;
+  --afw-subtle: #222222;
+  --afw-page: #ffffff;
+  --afw-surface: #ffffff;
+  --afw-panel: #ffffff;
+  --afw-choice-surface: #ffffff;
+  --afw-choice-surface-hover: #fff7bf;
+  --afw-field-surface: #ffffff;
+  --afw-border: #000000;
+  --afw-accent: #0037ff;
+  --afw-accent-strong: #000000;
+  --afw-accent-contrast: #ffffff;
+  --afw-complete: #006b2e;
+  --afw-complete-contrast: #ffffff;
+  --afw-complete-surface: #e9ffe9;
+  --afw-warning: #8a3d00;
+  --afw-error: #b00000;
+  --afw-focus: #000000;
+  --afw-mix-light: #ffffff;
+  --afw-shell-background: #ffffff;
+  --afw-form-border: #000000;
+  --afw-progress-track: #ffffff;
+  --afw-progress-fill: #0037ff;
+  --afw-error-surface: #fff0f0;
+  --afw-error-border: #b00000;
+  --afw-step-toggle-hover-surface: #fff7bf;
+  --afw-step-toggle-focus-surface: #fff7bf;
+  --afw-step-active-ring: #ffbf00;
+  --afw-step-complete-background: #e9ffe9;
+  --afw-step-complete-border: #006b2e;
+  --afw-step-complete-focus-surface: #fff7bf;
+  --afw-choice-hover-border: #000000;
+  --afw-choice-checked-surface: #e8edff;
+  --afw-success-surface: #e9ffe9;
+  --afw-success-border: #006b2e;
+}

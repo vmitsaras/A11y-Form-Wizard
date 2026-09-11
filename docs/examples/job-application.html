@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Job Application Wizard Demo | A11y Form Wizard</title>
+    <link rel="stylesheet" href="../dist/styles.css" />
+    <link rel="stylesheet" href="../assets/themes/a11y-form-wizard-theme-default.css" />
+    <link rel="stylesheet" href="../assets/themes/a11y-form-wizard-theme-sage.css" />
+  <!-- seo-meta:start -->
+    <meta name="description" content="Explore a concise service advisor application that turns semantic form markup into an accessible, progressively enhanced wizard." />
+    <meta name="robots" content="index,follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="A11y Form Wizard" />
+    <meta property="og:title" content="Job Application Wizard Demo | A11y Form Wizard" />
+    <meta property="og:description" content="Explore a concise service advisor application that turns semantic form markup into an accessible, progressively enhanced wizard." />
+    <meta property="og:image" content="https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png" />
+    <meta property="og:image:alt" content="A11y Form Wizard accessible multistep form flow illustration" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Job Application Wizard Demo | A11y Form Wizard" />
+    <meta name="twitter:description" content="Explore a concise service advisor application that turns semantic form markup into an accessible, progressively enhanced wizard." />
+    <meta name="twitter:image" content="https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png" />
+    <meta name="twitter:image:alt" content="A11y Form Wizard accessible multistep form flow illustration" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "name": "Job Application Wizard Demo | A11y Form Wizard",
+      "description": "Explore a concise service advisor application that turns semantic form markup into an accessible, progressively enhanced wizard.",
+      "image": "https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png",
+      "inLanguage": "en",
+      "mainEntity": {
+        "@type": "SoftwareSourceCode",
+        "name": "A11y Form Wizard",
+        "description": "Accessible reusable vanilla JavaScript multistep form wizard.",
+        "codeRepository": "https://github.com/vmitsaras/A11y-Form-Wizard",
+        "programmingLanguage": [
+          "TypeScript",
+          "JavaScript"
+        ],
+        "runtimePlatform": "Browser",
+        "version": "1.0.0",
+        "license": "MIT",
+        "keywords": [
+          "accessibility",
+          "form",
+          "form wizard",
+          "multistep form",
+          "progressive enhancement",
+          "TypeScript",
+          "WCAG"
+        ],
+        "image": "https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png",
+        "creator": {
+          "@type": "Person",
+          "name": "Vasileios Mitsaras",
+          "url": "https://github.com/vmitsaras/",
+          "sameAs": [
+            "https://github.com/vmitsaras/",
+            "https://linkedin.com/in/vasilis-mitsaras"
+          ]
+        },
+        "targetProduct": {
+          "@type": "SoftwareApplication",
+          "name": "Modern web browsers",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Any",
+          "runtimePlatform": "Browser"
+        }
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "A11y Form Wizard",
+      "description": "Accessible reusable vanilla JavaScript multistep form wizard.",
+      "codeRepository": "https://github.com/vmitsaras/A11y-Form-Wizard",
+      "programmingLanguage": [
+        "TypeScript",
+        "JavaScript"
+      ],
+      "runtimePlatform": "Browser",
+      "version": "1.0.0",
+      "license": "MIT",
+      "keywords": [
+        "accessibility",
+        "form",
+        "form wizard",
+        "multistep form",
+        "progressive enhancement",
+        "TypeScript",
+        "WCAG"
+      ],
+      "image": "https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png",
+      "creator": {
+        "@type": "Person",
+        "name": "Vasileios Mitsaras",
+        "url": "https://github.com/vmitsaras/",
+        "sameAs": [
+          "https://github.com/vmitsaras/",
+          "https://linkedin.com/in/vasilis-mitsaras"
+        ]
+      },
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "Modern web browsers",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "runtimePlatform": "Browser"
+      }
+    }
+  ]
+}
+    </script>
+    <!-- seo-meta:end -->
+  </head>
+  <body class="a11y-form-wizard-demo">
+    <main>
+      <section
+        class="a11y-form-wizard"
+        data-a11y-form-wizard
+        data-theme="sage"
+        data-skin="editorial-split"
+        data-auto-advance-choice="false"
+        data-prevent-submit="true"
+        data-completed-message="Thanks. Your application has been received."
+        aria-labelledby="apply-title"
+      >
+        <div class="a11y-form-wizard__shell">
+          <div class="a11y-form-wizard__layout">
+            <aside class="a11y-form-wizard__aside">
+              <p class="a11y-form-wizard__badge">Munich · Full-time</p>
+              <p class="a11y-form-wizard__eyebrow">Apply directly</p>
+              <h1 class="a11y-form-wizard__headline" id="apply-title">
+                Service Advisor role
+              </h1>
+              <p class="a11y-form-wizard__lede">
+                No resume. No cover letter. Just a few quick steps.
+              </p>
+              <footer class="a11y-form-wizard__footer">
+                We reply within 24 hours on business days.
+              </footer>
+            </aside>
+
+            <div class="a11y-form-wizard__main">
+              <form class="a11y-form-wizard__form" action="/api/apply" method="post">
+                <input type="hidden" name="job_title" value="Service Advisor" />
+                <input type="hidden" name="location" value="Munich" />
+
+                <div class="a11y-form-wizard__progress-wrap" aria-label="Application progress">
+                  <progress
+                    class="a11y-form-wizard__progress"
+                    max="3"
+                    value="1"
+                    aria-label="Application progress"
+                    data-a11y-form-wizard-progress
+                  ></progress>
+                  <p class="a11y-form-wizard__progress-label">
+                    Step
+                    <span data-a11y-form-wizard-current-step>1</span> of
+                    <span data-a11y-form-wizard-total-steps>3</span>
+                  </p>
+                </div>
+
+                <div class="a11y-form-wizard__error-summary" data-a11y-form-wizard-error-summary hidden></div>
+                <div class="a11y-form-wizard__sr-only" data-a11y-form-wizard-live aria-live="polite"></div>
+
+                <fieldset class="a11y-form-wizard__step" data-a11y-form-wizard-step>
+                  <legend class="a11y-form-wizard__sr-only">Qualifications</legend>
+                  <p class="a11y-form-wizard__step-kicker">Qualifications</p>
+                  <h2 class="a11y-form-wizard__title" data-a11y-form-wizard-step-heading>
+                    What qualification do you bring?
+                  </h2>
+
+                  <div class="a11y-form-wizard__choices">
+                    <label class="a11y-form-wizard__choice" data-a11y-form-wizard-error-container>
+                      <input
+                        class="a11y-form-wizard__choice-input"
+                        type="radio"
+                        name="qualification"
+                        value="Serviceberatung"
+                        data-a11y-form-wizard-choice-input
+                        required
+                      />
+                      <span class="a11y-form-wizard__choice-icon" aria-hidden="true">1</span>
+                      <span class="a11y-form-wizard__choice-text">
+                        <span class="a11y-form-wizard__choice-label">Service advisor</span>
+                        <span class="a11y-form-wizard__choice-description">
+                          Experience in advising, intake, or service coordination.
+                        </span>
+                      </span>
+                    </label>
+
+                    <label class="a11y-form-wizard__choice" data-a11y-form-wizard-error-container>
+                      <input
+                        class="a11y-form-wizard__choice-input"
+                        type="radio"
+                        name="qualification"
+                        value="Business administration"
+                        data-a11y-form-wizard-choice-input
+                        required
+                      />
+                      <span class="a11y-form-wizard__choice-icon" aria-hidden="true">2</span>
+                      <span class="a11y-form-wizard__choice-text">
+                        <span class="a11y-form-wizard__choice-label">Business administration training</span>
+                        <span class="a11y-form-wizard__choice-description">
+                          Dealership, retail, customer service, or comparable experience.
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+
+                  <div class="a11y-form-wizard__actions">
+                    <button
+                      class="a11y-form-wizard__button a11y-form-wizard__button--primary"
+                      type="button"
+                      data-a11y-form-wizard-next
+                    >
+                      Continue
+                    </button>
+                  </div>
+                </fieldset>
+
+                <fieldset class="a11y-form-wizard__step" data-a11y-form-wizard-step>
+                  <legend class="a11y-form-wizard__sr-only">Start date</legend>
+                  <p class="a11y-form-wizard__step-kicker">Availability</p>
+                  <h2 class="a11y-form-wizard__title" data-a11y-form-wizard-step-heading>
+                    When could you start?
+                  </h2>
+
+                  <div class="a11y-form-wizard__choices">
+                    <label class="a11y-form-wizard__choice" data-a11y-form-wizard-error-container>
+                      <input
+                        class="a11y-form-wizard__choice-input"
+                        type="radio"
+                        name="start_date"
+                        value="Immediately"
+                        data-a11y-form-wizard-choice-input
+                        required
+                      />
+                      <span class="a11y-form-wizard__choice-text">
+                        <span class="a11y-form-wizard__choice-label">Immediately</span>
+                        <span class="a11y-form-wizard__choice-description">Within the next week.</span>
+                      </span>
+                    </label>
+
+                    <label class="a11y-form-wizard__choice" data-a11y-form-wizard-error-container>
+                      <input
+                        class="a11y-form-wizard__choice-input"
+                        type="radio"
+                        name="start_date"
+                        value="After notice period"
+                        data-a11y-form-wizard-choice-input
+                        required
+                      />
+                      <span class="a11y-form-wizard__choice-text">
+                        <span class="a11y-form-wizard__choice-label">After notice period</span>
+                        <span class="a11y-form-wizard__choice-description">In two to eight weeks.</span>
+                      </span>
+                    </label>
+                  </div>
+
+                  <div class="a11y-form-wizard__actions">
+                    <button
+                      class="a11y-form-wizard__button a11y-form-wizard__button--secondary"
+                      type="button"
+                      data-a11y-form-wizard-previous
+                    >
+                      Back
+                    </button>
+                    <button
+                      class="a11y-form-wizard__button a11y-form-wizard__button--primary"
+                      type="button"
+                      data-a11y-form-wizard-next
+                    >
+                      Continue
+                    </button>
+                  </div>
+                </fieldset>
+
+                <fieldset
+                  class="a11y-form-wizard__step"
+                  data-a11y-form-wizard-step
+                  data-a11y-form-wizard-auto-advance="false"
+                >
+                  <legend class="a11y-form-wizard__sr-only">Contact</legend>
+                  <p class="a11y-form-wizard__step-kicker">Contact</p>
+                  <h2 class="a11y-form-wizard__title" data-a11y-form-wizard-step-heading>
+                    How can we reach you?
+                  </h2>
+
+                  <div class="a11y-form-wizard__fields">
+                    <div class="a11y-form-wizard__field" data-a11y-form-wizard-error-container>
+                      <label class="a11y-form-wizard__field-label" for="job-apply-name">Name</label>
+                      <div class="a11y-form-wizard__field-shell">
+                        <input
+                          class="a11y-form-wizard__input"
+                          id="job-apply-name"
+                          name="full_name"
+                          type="text"
+                          autocomplete="name"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div class="a11y-form-wizard__field" data-a11y-form-wizard-error-container>
+                      <label class="a11y-form-wizard__field-label" for="job-apply-email">Email</label>
+                      <div class="a11y-form-wizard__field-shell">
+                        <input
+                          class="a11y-form-wizard__input"
+                          id="job-apply-email"
+                          name="email"
+                          type="email"
+                          autocomplete="email"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <label class="a11y-form-wizard__consent" data-a11y-form-wizard-error-container>
+                      <input class="a11y-form-wizard__checkbox" type="checkbox" name="privacy" required />
+                      <span>I agree to be contacted about my application.</span>
+                    </label>
+                  </div>
+
+                  <div class="a11y-form-wizard__actions">
+                    <button
+                      class="a11y-form-wizard__button a11y-form-wizard__button--secondary"
+                      type="button"
+                      data-a11y-form-wizard-previous
+                    >
+                      Back
+                    </button>
+                    <button class="a11y-form-wizard__button a11y-form-wizard__button--primary" type="submit">
+                      Submit application
+                    </button>
+                  </div>
+
+                  <p class="a11y-form-wizard__success" data-a11y-form-wizard-success tabindex="-1" hidden></p>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script type="module">
+      import { initA11yFormWizardAll } from '../dist/index.js';
+
+      initA11yFormWizardAll();
+    </script>
+  </body>
+</html>

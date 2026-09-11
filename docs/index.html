@@ -1,0 +1,1143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Accessible Multistep Form Wizard | A11y Form Wizard</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="./dist/styles.css" />
+    <link rel="stylesheet" href="./assets/themes/a11y-form-wizard-theme-default.css" />
+    <link rel="stylesheet" href="./assets/themes/a11y-form-wizard-theme-dark.css" />
+    <link rel="stylesheet" href="./assets/themes/a11y-form-wizard-theme-sage.css" />
+    <link rel="stylesheet" href="./assets/docs.css" />
+  <!-- seo-meta:start -->
+    <meta name="description" content="Explore an accessible vanilla JavaScript form wizard with semantic markup, validation, live announcements, focus management, and example flows." />
+    <meta name="robots" content="index,follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="A11y Form Wizard" />
+    <meta property="og:title" content="Accessible Multistep Form Wizard | A11y Form Wizard" />
+    <meta property="og:description" content="Explore an accessible vanilla JavaScript form wizard with semantic markup, validation, live announcements, focus management, and example flows." />
+    <meta property="og:image" content="https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png" />
+    <meta property="og:image:alt" content="A11y Form Wizard accessible multistep form flow illustration" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Accessible Multistep Form Wizard | A11y Form Wizard" />
+    <meta name="twitter:description" content="Explore an accessible vanilla JavaScript form wizard with semantic markup, validation, live announcements, focus management, and example flows." />
+    <meta name="twitter:image" content="https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png" />
+    <meta name="twitter:image:alt" content="A11y Form Wizard accessible multistep form flow illustration" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "name": "Accessible Multistep Form Wizard | A11y Form Wizard",
+      "description": "Explore an accessible vanilla JavaScript form wizard with semantic markup, validation, live announcements, focus management, and example flows.",
+      "image": "https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png",
+      "inLanguage": "en",
+      "mainEntity": {
+        "@type": "SoftwareSourceCode",
+        "name": "A11y Form Wizard",
+        "description": "Accessible reusable vanilla JavaScript multistep form wizard.",
+        "codeRepository": "https://github.com/vmitsaras/A11y-Form-Wizard",
+        "programmingLanguage": [
+          "TypeScript",
+          "JavaScript"
+        ],
+        "runtimePlatform": "Browser",
+        "version": "1.0.0",
+        "license": "MIT",
+        "keywords": [
+          "accessibility",
+          "form",
+          "form wizard",
+          "multistep form",
+          "progressive enhancement",
+          "TypeScript",
+          "WCAG"
+        ],
+        "image": "https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png",
+        "creator": {
+          "@type": "Person",
+          "name": "Vasileios Mitsaras",
+          "url": "https://github.com/vmitsaras/",
+          "sameAs": [
+            "https://github.com/vmitsaras/",
+            "https://linkedin.com/in/vasilis-mitsaras"
+          ]
+        },
+        "targetProduct": {
+          "@type": "SoftwareApplication",
+          "name": "Modern web browsers",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Any",
+          "runtimePlatform": "Browser"
+        }
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "A11y Form Wizard",
+      "description": "Accessible reusable vanilla JavaScript multistep form wizard.",
+      "codeRepository": "https://github.com/vmitsaras/A11y-Form-Wizard",
+      "programmingLanguage": [
+        "TypeScript",
+        "JavaScript"
+      ],
+      "runtimePlatform": "Browser",
+      "version": "1.0.0",
+      "license": "MIT",
+      "keywords": [
+        "accessibility",
+        "form",
+        "form wizard",
+        "multistep form",
+        "progressive enhancement",
+        "TypeScript",
+        "WCAG"
+      ],
+      "image": "https://github.com/vmitsaras/A11y-Form-Wizard/raw/refs/heads/main/.github/social-preview.png",
+      "creator": {
+        "@type": "Person",
+        "name": "Vasileios Mitsaras",
+        "url": "https://github.com/vmitsaras/",
+        "sameAs": [
+          "https://github.com/vmitsaras/",
+          "https://linkedin.com/in/vasilis-mitsaras"
+        ]
+      },
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "Modern web browsers",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "runtimePlatform": "Browser"
+      }
+    }
+  ]
+}
+    </script>
+    <!-- seo-meta:end -->
+  </head>
+  <body class="docs-page">
+    <a class="docs-skip-link" href="#main-content">Skip to main content</a>
+    <header class="docs-topbar">
+      <a class="docs-brand" href="./">A11y Form Wizard</a>
+      <nav class="docs-nav" aria-label="Documentation">
+        <a href="#live-demo">Demo</a>
+        <a href="#install">Install</a>
+        <a href="#accessibility">Accessibility</a>
+        <a href="#api">API</a>
+        <a href="#examples">Examples</a>
+        <a href="https://github.com/vmitsaras/A11y-Form-Wizard">GitHub</a>
+      </nav>
+    </header>
+
+    <main id="main-content" tabindex="-1">
+      <section class="docs-hero" aria-labelledby="docs-title">
+        <div class="docs-hero__content">
+          <p class="docs-eyebrow">Vanilla JavaScript plugin</p>
+          <h1 id="docs-title">A11y Form Wizard</h1>
+          <p class="docs-lede">
+            A semantic, progressively enhanced multistep form wizard that keeps
+            native form controls, keyboard flow, validation, and live
+            announcements intact.
+          </p>
+          <div class="docs-actions" aria-label="Primary links">
+            <a class="docs-button docs-button--primary" href="#live-demo">Try the demo</a>
+            <a class="docs-button" href="#install">Install and use</a>
+            <a class="docs-button" href="#accessibility">Accessibility behavior</a>
+            <a class="docs-button" href="./dist/index.js">View JavaScript</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="docs-facts" aria-labelledby="facts-title">
+        <h2 class="a11y-form-wizard__sr-only" id="facts-title">Quick facts</h2>
+        <dl class="docs-facts__list">
+          <div><dt>Package</dt><dd><code>a11y-form-wizard</code></dd></div>
+          <div><dt>Repository version</dt><dd><code>1.0.0</code></dd></div>
+          <div><dt>Approach</dt><dd>Progressive enhancement</dd></div>
+          <div><dt>Runtime</dt><dd>Vanilla JavaScript, no dependencies</dd></div>
+          <div><dt>Best for</dt><dd>Short, structured multistep forms</dd></div>
+        </dl>
+      </section>
+
+      <section class="docs-band" id="live-demo" aria-labelledby="live-demo-title">
+        <div class="docs-section-heading">
+          <p class="docs-eyebrow">Live component</p>
+          <h2 id="live-demo-title">Build a short project intake form</h2>
+          <p>
+            Choose a form type, add an email address, and complete the flow.
+            The static demo prevents submission so it can show the success
+            state without a backend.
+          </p>
+        </div>
+
+        <aside class="docs-try" aria-labelledby="try-title">
+          <h3 id="try-title">Try it</h3>
+          <ol>
+            <li>Select <strong>Continue</strong> without choosing an option to expose validation.</li>
+            <li>Complete the flow using only <kbd>Tab</kbd>, <kbd>Shift</kbd> + <kbd>Tab</kbd>, <kbd>Space</kbd>, and <kbd>Enter</kbd>.</li>
+            <li>Notice that focus moves to the active step heading after navigation.</li>
+            <li>Submit an invalid email, correct it, and observe the success state.</li>
+          </ol>
+        </aside>
+
+        <section
+          class="a11y-form-wizard docs-wizard"
+          data-a11y-form-wizard
+          data-auto-advance-choice="false"
+          data-prevent-submit="true"
+          aria-labelledby="demo-form-title"
+        >
+          <form class="a11y-form-wizard__form" action="/api/demo-intake" method="post">
+            <input type="hidden" name="source" value="docs-home" />
+
+            <div class="a11y-form-wizard__progress-wrap" aria-label="Demo progress">
+              <progress
+                class="a11y-form-wizard__progress"
+                max="2"
+                value="1"
+                aria-label="Demo progress"
+                data-a11y-form-wizard-progress
+              ></progress>
+              <p class="a11y-form-wizard__progress-label">
+                Step
+                <span data-a11y-form-wizard-current-step>1</span> of
+                <span data-a11y-form-wizard-total-steps>2</span>
+              </p>
+            </div>
+
+            <div
+              class="a11y-form-wizard__error-summary"
+              data-a11y-form-wizard-error-summary
+              hidden
+            ></div>
+            <div class="a11y-form-wizard__sr-only" data-a11y-form-wizard-live aria-live="polite"></div>
+
+            <fieldset class="a11y-form-wizard__step" data-a11y-form-wizard-step>
+              <legend class="a11y-form-wizard__sr-only">Project type</legend>
+              <p class="a11y-form-wizard__step-kicker">Step 1</p>
+              <h2
+                class="a11y-form-wizard__title"
+                id="demo-form-title"
+                data-a11y-form-wizard-step-heading
+              >
+                What kind of form are you building?
+              </h2>
+
+              <div class="a11y-form-wizard__choices">
+                <label class="a11y-form-wizard__choice">
+                  <input
+                    class="a11y-form-wizard__choice-input"
+                    type="radio"
+                    name="project_type"
+                    value="Job application"
+                    data-a11y-form-wizard-choice-input
+                    required
+                  />
+                  <span class="a11y-form-wizard__choice-text">
+                    <span class="a11y-form-wizard__choice-label">Job application</span>
+                    <span class="a11y-form-wizard__choice-description">
+                      Screen candidates with short role-specific questions.
+                    </span>
+                  </span>
+                </label>
+
+                <label class="a11y-form-wizard__choice">
+                  <input
+                    class="a11y-form-wizard__choice-input"
+                    type="radio"
+                    name="project_type"
+                    value="Customer intake"
+                    data-a11y-form-wizard-choice-input
+                    required
+                  />
+                  <span class="a11y-form-wizard__choice-text">
+                    <span class="a11y-form-wizard__choice-label">Customer intake</span>
+                    <span class="a11y-form-wizard__choice-description">
+                      Gather context before a quote, onboarding, or support flow.
+                    </span>
+                  </span>
+                </label>
+              </div>
+
+              <div class="a11y-form-wizard__actions">
+                <button
+                  class="a11y-form-wizard__button a11y-form-wizard__button--primary"
+                  type="button"
+                  data-a11y-form-wizard-next
+                >
+                  Continue
+                </button>
+              </div>
+            </fieldset>
+
+            <fieldset
+              class="a11y-form-wizard__step"
+              data-a11y-form-wizard-step
+              data-a11y-form-wizard-auto-advance="false"
+            >
+              <legend class="a11y-form-wizard__sr-only">Contact details</legend>
+              <p class="a11y-form-wizard__step-kicker">Step 2</p>
+              <h2 class="a11y-form-wizard__title" data-a11y-form-wizard-step-heading>
+                Where should the demo send the result?
+              </h2>
+
+              <div class="a11y-form-wizard__fields">
+                <div class="a11y-form-wizard__field">
+                  <label class="a11y-form-wizard__field-label" for="docs-demo-email">
+                    Email address
+                  </label>
+                  <div class="a11y-form-wizard__field-shell">
+                    <input
+                      class="a11y-form-wizard__input"
+                      id="docs-demo-email"
+                      name="email"
+                      type="email"
+                      autocomplete="email"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="a11y-form-wizard__actions">
+                <button
+                  class="a11y-form-wizard__button a11y-form-wizard__button--secondary"
+                  type="button"
+                  data-a11y-form-wizard-previous
+                >
+                  Back
+                </button>
+                <button
+                  class="a11y-form-wizard__button a11y-form-wizard__button--primary"
+                  type="submit"
+                >
+                  Submit demo
+                </button>
+              </div>
+
+              <p
+                class="a11y-form-wizard__success"
+                data-a11y-form-wizard-success
+                tabindex="-1"
+                hidden
+              ></p>
+            </fieldset>
+          </form>
+        </section>
+      </section>
+
+      <section class="docs-band" id="install" aria-labelledby="install-title">
+        <div class="docs-section-heading">
+          <p class="docs-eyebrow">Install</p>
+          <h2 id="install-title">Add the package</h2>
+          <p>
+            Install the package, import the base stylesheet, then initialize
+            one semantic wizard root. The package does not auto-initialize.
+          </p>
+        </div>
+        <div class="docs-code-grid">
+          <article class="docs-code-panel">
+            <h3>Install with npm</h3>
+            <pre><code>npm install a11y-form-wizard</code></pre>
+          </article>
+          <article class="docs-code-panel">
+            <h3>Import and initialize</h3>
+            <pre><code>import { createA11yFormWizard } from 'a11y-form-wizard';
+import 'a11y-form-wizard/styles.css';
+
+const root = document.querySelector('[data-a11y-form-wizard]');
+
+if (root instanceof HTMLElement) {
+  createA11yFormWizard(root);
+}</code></pre>
+          </article>
+        </div>
+        <p class="docs-caveat">
+          The install command reflects the intended package usage. Verify the
+          package is published and reachable before a public launch.
+        </p>
+      </section>
+
+      <section class="docs-band" id="instructions" aria-labelledby="instructions-title">
+        <div class="docs-section-heading">
+          <p class="docs-eyebrow">Instructions</p>
+          <h2 id="instructions-title">Use the plugin on a page</h2>
+          <p>
+            The wizard starts from meaningful form markup, then the module hides
+            inactive steps, updates progress, validates native controls, moves
+            focus, and announces changes.
+          </p>
+        </div>
+
+        <div class="docs-instruction-grid">
+          <article class="docs-code-panel">
+            <h3>1. Add the assets</h3>
+            <pre><code>&lt;link rel="stylesheet" href="./dist/styles.css" /&gt;
+&lt;link rel="stylesheet" href="./assets/themes/a11y-form-wizard-theme-default.css" /&gt;
+
+&lt;script type="module"&gt;
+  import { initA11yFormWizardAll } from './dist/index.js';
+
+  initA11yFormWizardAll();
+&lt;/script&gt;</code></pre>
+          </article>
+
+          <article class="docs-code-panel">
+            <h3>2. Initialize one wizard</h3>
+            <pre><code>import { A11yFormWizard } from './dist/index.js';
+
+const root = document.querySelector('[data-a11y-form-wizard]');
+const wizard = new A11yFormWizard(root, {
+  preventSubmit: true,
+  autoAdvanceChoice: false,
+});
+
+wizard.next();</code></pre>
+          </article>
+
+          <article class="docs-note-panel">
+            <h3>Publishing workflow</h3>
+            <ol class="docs-steps">
+              <li>Edit source files in <code>src/</code> and editable examples in <code>examples/</code>.</li>
+              <li>Run <code>npm run docs:sync</code> to copy publishable files into <code>docs/</code>.</li>
+              <li>Preview with <code>npm run docs:serve</code>.</li>
+              <li>Publish GitHub Pages from the <code>main</code> branch and the <code>/docs</code> folder.</li>
+            </ol>
+            <p>
+              The static examples use placeholder form actions and prevented
+              submissions. Production forms still need real endpoints and
+              server-side validation.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="docs-band" id="accessibility" aria-labelledby="accessibility-title">
+        <div class="docs-section-heading">
+          <p class="docs-eyebrow">Accessibility</p>
+          <h2 id="accessibility-title">Behavior you can verify</h2>
+          <p>
+            The plugin enhances meaningful form markup and keeps native control
+            behavior. Test the result with the browsers and assistive
+            technologies your product supports. The
+            <a href="./examples/async-validation.html#screen-reader-expectations"
+              >validator laboratory expectation table</a
+            >
+            documents focus, busy-state, and announcement ownership for advanced
+            validation states.
+          </p>
+        </div>
+        <div class="docs-accessibility-grid">
+          <article class="docs-note-panel">
+            <h3>Semantics, focus, and status</h3>
+            <ul class="docs-check-list">
+              <li>Uses native forms, fieldsets, legends, labels, inputs, and buttons.</li>
+              <li>Focus moves to the active step heading after step changes.</li>
+              <li>Invalid fields receive focus and are associated with generated error text.</li>
+              <li>Progress, step changes, validation errors, and demo success are exposed as text.</li>
+              <li>Radio auto-advance is opt-in to avoid an unexpected context change.</li>
+              <li>Transitions respect <code>prefers-reduced-motion</code>, and states do not rely on color alone.</li>
+            </ul>
+          </article>
+          <article class="docs-note-panel">
+            <h3>Keyboard interaction</h3>
+            <dl class="docs-key-list">
+              <div><dt><kbd>Tab</kbd> / <kbd>Shift</kbd> + <kbd>Tab</kbd></dt><dd>Moves through native form and navigation controls in document order.</dd></div>
+              <div><dt><kbd>Space</kbd> / <kbd>Enter</kbd></dt><dd>Activates native buttons, radio buttons, checkboxes, and submit controls.</dd></div>
+              <div><dt><kbd>Enter</kbd> on form controls</dt><dd>Uses native submission, validates all steps, and focuses the first invalid field.</dd></div>
+              <div><dt>Stacked step trigger</dt><dd>Uses a native button to reopen completed or current steps.</dd></div>
+            </dl>
+          </article>
+        </div>
+      </section>
+
+      <section class="docs-band" id="api" aria-labelledby="api-title">
+        <div class="docs-section-heading">
+          <p class="docs-eyebrow">API</p>
+          <h2 id="api-title">Methods, functions, and options</h2>
+          <p>
+            Public methods are intentionally small. Step indexes passed to
+            JavaScript are zero-based; event details report human-readable
+            one-based step numbers.
+          </p>
+        </div>
+
+        <div class="docs-api-grid">
+          <article class="docs-note-panel">
+            <h3>Exports</h3>
+            <dl class="docs-definition-list">
+              <dt><code>A11yFormWizard</code></dt>
+              <dd>Main class. Pass a root element and optional settings.</dd>
+              <dt><code>createA11yFormWizard(root, options)</code></dt>
+              <dd>Initializes one root and returns the existing instance when that root is already initialized.</dd>
+              <dt><code>initA11yFormWizardAll(options)</code></dt>
+              <dd>Initializes every <code>[data-a11y-form-wizard]</code> root and returns an array of instances.</dd>
+              <dt><code>createA11yFormValidatorBridge(options)</code></dt>
+              <dd>Optional subpath integration for the exact <code>a11y-form-validator@1.0.19</code> peer dependency.</dd>
+              <dt><code>DEFAULT_OPTIONS</code></dt>
+              <dd>Frozen defaults used by every instance.</dd>
+              <dt><code>SELECTORS</code>, <code>CLASSES</code>, <code>ATTRIBUTES</code>, <code>EVENTS</code></dt>
+              <dd>Shared constants for integrations and tests.</dd>
+              <dt><code>DISPLAY_MODES</code>, <code>STEP_STATUS_TEXT</code></dt>
+              <dd>Shared constants for stacked layout integrations.</dd>
+            </dl>
+          </article>
+
+          <article class="docs-note-panel">
+            <h3>Static methods</h3>
+            <dl class="docs-definition-list">
+              <dt><code>A11yFormWizard.initAll(options)</code></dt>
+              <dd>Alias for <code>initA11yFormWizardAll(options)</code>.</dd>
+              <dt><code>A11yFormWizard.optionsFromDataset(root)</code></dt>
+              <dd>Reads supported <code>data-*</code> settings from the root element.</dd>
+            </dl>
+          </article>
+        </div>
+
+        <div class="docs-table-wrap" tabindex="0">
+          <table class="docs-table">
+            <caption>Instance methods</caption>
+            <thead>
+              <tr>
+                <th scope="col">Method</th>
+                <th scope="col">Returns</th>
+                <th scope="col">Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"><code>next(options)</code></th>
+                <td><code>boolean</code></td>
+                <td>Runs native validation synchronously and moves forward without invoking an adapter.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>nextAsync(options)</code></th>
+                <td><code>Promise&lt;boolean&gt;</code></td>
+                <td>Runs native validation first, then the configured validation adapter, and moves only when the current result is valid.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>previous(options)</code></th>
+                <td><code>boolean</code></td>
+                <td>Moves to the previous step when one exists.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>goToStep(index, options)</code></th>
+                <td><code>boolean</code></td>
+                <td>Moves to a zero-based step index after clamping to the available range.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>setValidationAdapter(adapter, owner)</code></th>
+                <td><code>void</code></td>
+                <td>Connects an adapter or restores wizard validation. External ownership must be selected during initialization.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>completeExternalSubmit(event)</code></th>
+                <td><code>void</code></td>
+                <td>Completes wizard submit behavior after an external validator replays a valid submission.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>getData()</code></th>
+                <td><code>object</code></td>
+                <td>Returns current form data. Repeated field names become arrays.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>reset()</code></th>
+                <td><code>void</code></td>
+                <td>Resets the form, clears errors and success state, and returns to the start step.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>destroy()</code></th>
+                <td><code>void</code></td>
+                <td>Removes listeners, clears plugin state, and reveals every step again.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="docs-table-wrap" tabindex="0">
+          <table class="docs-table">
+            <caption>Options</caption>
+            <thead>
+              <tr>
+                <th scope="col">Option</th>
+                <th scope="col">Default</th>
+                <th scope="col">Dataset attribute</th>
+                <th scope="col">Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"><code>startStep</code></th>
+                <td><code>0</code></td>
+                <td><code>data-start-step</code></td>
+                <td>Zero-based step shown first.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>displayMode</code></th>
+                <td><code>single</code></td>
+                <td><code>data-display-mode</code></td>
+                <td>Use <code>stacked</code> to keep every step header visible.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>autoAdvanceChoice</code></th>
+                <td><code>false</code></td>
+                <td><code>data-auto-advance-choice</code></td>
+                <td>Opt-in context change that advances after a valid marked radio choice.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>autoAdvanceDelay</code></th>
+                <td><code>140</code></td>
+                <td><code>data-auto-advance-delay</code></td>
+                <td>Delay in milliseconds before radio auto-advance.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>preventSubmit</code></th>
+                <td><code>true</code></td>
+                <td><code>data-prevent-submit</code></td>
+                <td>Prevents native submit and shows the success region for demos.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>focusStepOnChange</code></th>
+                <td><code>true</code></td>
+                <td><code>data-focus-step-on-change</code></td>
+                <td>Moves focus to the new step heading.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>scrollOnStepChange</code></th>
+                <td><code>true</code></td>
+                <td><code>data-scroll-on-step-change</code></td>
+                <td>Scrolls the focused step heading into view.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>validationFocus</code></th>
+                <td><code>first-invalid</code></td>
+                <td><code>data-validation-focus</code></td>
+                <td>Moves focus to the first invalid control or, when set to <code>summary</code>, to the linked error summary.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>validationOwner</code></th>
+                <td><code>wizard</code></td>
+                <td>Programmatic only</td>
+                <td>Selects built-in validation ownership or external ownership before a validator bridge is connected.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>completedMessage</code></th>
+                <td>Built in</td>
+                <td><code>data-completed-message</code></td>
+                <td>Success text shown when demo submits are prevented.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>validationAdapter</code></th>
+                <td><code>null</code></td>
+                <td>Programmatic only</td>
+                <td>Runs optional synchronous or asynchronous step and form rules after native constraints pass.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <article class="docs-code-panel">
+          <h3>Method options</h3>
+          <pre><code>wizard.goToStep(2, {
+  focus: true,
+  scroll: true,
+  triggeredByChoice: false,
+});</code></pre>
+        </article>
+
+        <div class="docs-api-grid">
+          <article class="docs-note-panel">
+            <h3>Review and edit</h3>
+            <p>
+              Review steps are author-provided markup. Map only native control
+              names that are appropriate to repeat visibly, and use native edit
+              buttons to return to a step. Password, file, hidden, and
+              button-style inputs are excluded. Reset and destroy restore the
+              original review content.
+            </p>
+          </article>
+
+          <article class="docs-note-panel">
+            <h3>Async and external validation</h3>
+            <p>
+              Native constraints run first. A validation adapter owns its own
+              invalid output; the wizard owns operational failures, pending
+              state, and stale-result protection. Cancellation is cooperative,
+              so adapter code must pass the provided <code>AbortSignal</code> to
+              abortable work. External ownership must be selected when the
+              wizard is initialized before connecting the validator bridge.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="docs-band" id="markup" aria-labelledby="markup-title">
+        <div class="docs-section-heading">
+          <p class="docs-eyebrow">Markup</p>
+          <h2 id="markup-title">Markup contract</h2>
+          <p>
+            Keep native form controls in place. The data attributes identify
+            plugin roots, steps, controls, progress text, error output, and
+            lifecycle regions.
+          </p>
+        </div>
+
+        <article class="docs-code-panel">
+          <h3>Minimal structure</h3>
+          <pre><code>&lt;section class="a11y-form-wizard" data-a11y-form-wizard&gt;
+  &lt;form action="/api/job-application" method="post"&gt;
+    &lt;progress aria-label="Form progress" data-a11y-form-wizard-progress&gt;&lt;/progress&gt;
+    &lt;span data-a11y-form-wizard-current-step&gt;1&lt;/span&gt;
+    &lt;span data-a11y-form-wizard-total-steps&gt;2&lt;/span&gt;
+    &lt;div data-a11y-form-wizard-error-summary hidden&gt;&lt;/div&gt;
+    &lt;div data-a11y-form-wizard-live aria-live="polite"&gt;&lt;/div&gt;
+
+    &lt;fieldset data-a11y-form-wizard-step&gt;
+      &lt;legend&gt;Step label&lt;/legend&gt;
+      &lt;h2 data-a11y-form-wizard-step-heading&gt;Question&lt;/h2&gt;
+      &lt;label data-a11y-form-wizard-error-container&gt;
+        &lt;input
+          type="radio"
+          name="answer"
+          required
+          data-a11y-form-wizard-choice-input
+        /&gt;
+        Choice text
+      &lt;/label&gt;
+      &lt;button type="button" data-a11y-form-wizard-next&gt;Continue&lt;/button&gt;
+    &lt;/fieldset&gt;
+  &lt;/form&gt;
+&lt;/section&gt;</code></pre>
+        </article>
+
+        <div class="docs-table-wrap" tabindex="0">
+          <table class="docs-table">
+            <caption>Data attributes</caption>
+            <thead>
+              <tr>
+                <th scope="col">Attribute</th>
+                <th scope="col">Required</th>
+                <th scope="col">Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"><code>data-a11y-form-wizard</code></th>
+                <td>Yes</td>
+                <td>Marks the root element for one plugin instance.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>data-theme</code></th>
+                <td>No</td>
+                <td>Selects a loaded token palette.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>data-skin</code></th>
+                <td>No</td>
+                <td>Selects a CSS-only layout and shape treatment.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>data-density</code></th>
+                <td>No</td>
+                <td>Selects spacing density: compact, comfortable, or spacious.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>data-a11y-form-wizard-step</code></th>
+                <td>Yes</td>
+                <td>Marks each step, usually on a <code>fieldset</code>.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>data-a11y-form-wizard-step-heading</code></th>
+                <td>Recommended</td>
+                <td>Preferred focus target after step changes; falls back to <code>legend</code>, then the first heading.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>data-a11y-form-wizard-step-panel</code></th>
+                <td>No</td>
+                <td>Collapsible panel used by stacked display mode.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>data-a11y-form-wizard-step-trigger</code></th>
+                <td>No</td>
+                <td>Header button used to open a stacked step.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>data-a11y-form-wizard-step-status</code></th>
+                <td>No</td>
+                <td>Visible status text updated as steps become current, next, pending, or complete.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>data-a11y-form-wizard-step-name</code></th>
+                <td>No</td>
+                <td>Human-readable step name used in blocked-step announcements.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>data-a11y-form-wizard-choice-input</code></th>
+                <td>No</td>
+                <td>Marks radio inputs eligible for auto-advance.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>data-a11y-form-wizard-next</code></th>
+                <td>No</td>
+                <td>Button that validates and advances the active step.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>data-a11y-form-wizard-previous</code></th>
+                <td>No</td>
+                <td>Button that moves to the previous step.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>data-a11y-form-wizard-reset</code></th>
+                <td>No</td>
+                <td>Button that calls <code>reset()</code>.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>data-a11y-form-wizard-review-step</code></th>
+                <td>No</td>
+                <td>Marks an author-provided review step that is populated when opened.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>data-a11y-form-wizard-review-value</code></th>
+                <td>No</td>
+                <td>Maps a text target to a native form control name.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>data-a11y-form-wizard-edit-step</code></th>
+                <td>No</td>
+                <td>Maps a native edit button to a step ID in the same wizard.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>data-a11y-form-wizard-progress</code></th>
+                <td>No</td>
+                <td>Native <code>progress</code> element updated on step changes.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>data-a11y-form-wizard-current-step</code></th>
+                <td>No</td>
+                <td>Text target for the current one-based step number.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>data-a11y-form-wizard-total-steps</code></th>
+                <td>No</td>
+                <td>Text target for the total step count.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>data-a11y-form-wizard-error-summary</code></th>
+                <td>No</td>
+                <td>Validation summary shown when a step has invalid controls.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>data-a11y-form-wizard-error-container</code></th>
+                <td>No</td>
+                <td>Error-state wrapper for custom markup. BEM field, choice, and consent classes remain supported.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>data-a11y-form-wizard-live</code></th>
+                <td>No</td>
+                <td>Polite live region for step announcements.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>data-a11y-form-wizard-success</code></th>
+                <td>No</td>
+                <td>Success message target for prevented demo submits.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>data-a11y-form-wizard-auto-advance="false"</code></th>
+                <td>No</td>
+                <td>Disables radio auto-advance on a specific step.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="docs-band" id="themes" aria-labelledby="themes-title">
+        <div class="docs-section-heading">
+          <p class="docs-eyebrow">Themes and skins</p>
+          <h2 id="themes-title">Palette and layout</h2>
+          <p>
+            Load the base component CSS first, then one or more theme files.
+            Select palette with <code>data-theme</code>, layout treatment with
+            <code>data-skin</code>, and spacing with <code>data-density</code>.
+          </p>
+        </div>
+
+        <div class="docs-code-grid">
+          <article class="docs-code-panel">
+            <h3>Use a built-in theme</h3>
+            <pre><code>&lt;link rel="stylesheet" href="./dist/styles.css" /&gt;
+&lt;link rel="stylesheet" href="./assets/themes/a11y-form-wizard-theme-dark.css" /&gt;
+
+&lt;section
+  class="a11y-form-wizard"
+  data-a11y-form-wizard
+  data-theme="dark"
+  data-skin="terminal"
+  data-density="compact"
+&gt;
+  ...
+&lt;/section&gt;</code></pre>
+          </article>
+
+          <article class="docs-note-panel">
+            <h3>Included themes</h3>
+            <dl class="docs-definition-list">
+              <dt><code>default</code></dt>
+              <dd>Original teal and amber palette. Also applies when no <code>data-theme</code> is present and the default theme file is loaded.</dd>
+              <dt><code>dark</code></dt>
+              <dd>Dark palette using <code>color-scheme: dark</code>.</dd>
+              <dt><code>contrast</code></dt>
+              <dd>High-contrast palette with strong focus colors.</dd>
+              <dt><code>ocean</code></dt>
+              <dd>Light blue and cyan palette.</dd>
+              <dt><code>sage</code>, <code>rose</code>, <code>mono</code>, <code>amber</code></dt>
+              <dd>Additional token-only palettes for custom-looking flows.</dd>
+            </dl>
+          </article>
+        </div>
+
+        <article class="docs-code-panel">
+          <h3>Customize tokens</h3>
+          <pre><code>.a11y-form-wizard[data-theme="brand"] {
+  --afw-accent: #0f766e;
+  --afw-accent-strong: #115e59;
+  --afw-surface: #ffffff;
+  --afw-border: #cbd5e1;
+}</code></pre>
+        </article>
+
+        <article class="docs-note-panel">
+          <h3>Included skins</h3>
+          <p>
+            Use <code>editorial-split</code>, <code>bento</code>,
+            <code>receipt</code>, <code>timeline</code>, <code>terminal</code>,
+            <code>glass</code>, <code>brutalist</code>, or
+            <code>mobile-sheet</code>. Skins are CSS-only and do not change
+            wizard behavior.
+          </p>
+        </article>
+      </section>
+
+      <section class="docs-band" id="events" aria-labelledby="events-title">
+        <div class="docs-section-heading">
+          <p class="docs-eyebrow">Events</p>
+          <h2 id="events-title">Lifecycle events</h2>
+          <p>
+            Events bubble from the wizard root. Each event includes the plugin
+            instance in <code>event.detail.instance</code>.
+          </p>
+        </div>
+
+        <article class="docs-code-panel">
+          <h3>Listen for submission</h3>
+          <pre><code>document.addEventListener('a11y-form-wizard:submit', (event) =&gt; {
+  console.log(event.detail.data);
+});</code></pre>
+        </article>
+
+        <div class="docs-table-wrap" tabindex="0">
+          <table class="docs-table">
+            <caption>Event reference</caption>
+            <thead>
+              <tr>
+                <th scope="col">Event</th>
+                <th scope="col">When it fires</th>
+                <th scope="col">Useful detail</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"><code>a11y-form-wizard:init</code></th>
+                <td>Initialization completes.</td>
+                <td><code>currentStep</code></td>
+              </tr>
+              <tr>
+                <th scope="row"><code>a11y-form-wizard:step-change</code></th>
+                <td>Active step changes.</td>
+                <td><code>currentStep</code>, <code>previousStep</code>, <code>totalSteps</code>, <code>triggeredByChoice</code></td>
+              </tr>
+              <tr>
+                <th scope="row"><code>a11y-form-wizard:choice-change</code></th>
+                <td>A marked radio choice changes.</td>
+                <td><code>currentStep</code>, <code>name</code>, <code>value</code></td>
+              </tr>
+              <tr>
+                <th scope="row"><code>a11y-form-wizard:validation-error</code></th>
+                <td>A required field or invalid value blocks progress or submit.</td>
+                <td><code>currentStep</code>, <code>control</code>, <code>message</code></td>
+              </tr>
+              <tr>
+                <th scope="row"><code>a11y-form-wizard:validation-start</code></th>
+                <td>An adapter validation operation enters its single pending state.</td>
+                <td><code>phase</code>, <code>currentStep</code>, <code>trigger</code></td>
+              </tr>
+              <tr>
+                <th scope="row"><code>a11y-form-wizard:validation-end</code></th>
+                <td>An adapter operation finishes or is cancelled.</td>
+                <td><code>phase</code>, <code>status</code>, <code>currentStep</code></td>
+              </tr>
+              <tr>
+                <th scope="row"><code>a11y-form-wizard:submit</code></th>
+                <td>A valid form submission is attempted.</td>
+                <td><code>data</code>, <code>nativeEvent</code></td>
+              </tr>
+              <tr>
+                <th scope="row"><code>a11y-form-wizard:reset</code></th>
+                <td>The instance is reset.</td>
+                <td><code>instance</code></td>
+              </tr>
+              <tr>
+                <th scope="row"><code>a11y-form-wizard:destroy</code></th>
+                <td>The instance is destroyed.</td>
+                <td><code>instance</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="docs-band" id="examples" aria-labelledby="examples-title">
+        <div class="docs-section-heading">
+          <p class="docs-eyebrow">Examples</p>
+          <h2 id="examples-title">Published example pages</h2>
+        </div>
+
+        <div class="docs-link-grid">
+          <a class="docs-link-card" href="./basic/">
+            <span>Basic package example</span>
+            <small>Two-step semantic form using the compiled package entry point and default CSS.</small>
+          </a>
+          <a class="docs-link-card" href="./examples/theme-gallery.html">
+            <span>Theme gallery</span>
+            <small>Curated theme and skin combinations using the same data hooks.</small>
+          </a>
+          <a class="docs-link-card" href="./examples/markup-flexibility.html">
+            <span>Markup flexibility</span>
+            <small>BEM, classless, split, timeline, and compact job variants.</small>
+          </a>
+          <a class="docs-link-card" href="./examples/job-application.html">
+            <span>Split job application</span>
+            <small>English editorial split layout with explicit error containers.</small>
+          </a>
+          <a class="docs-link-card" href="./examples/stacked-application-accordion.html">
+            <span>Stacked application accordion</span>
+            <small>Five visible sections with current, next, pending, and complete states.</small>
+          </a>
+          <a class="docs-link-card" href="./examples/customer-support-application.html">
+            <span>Customer Support Specialist</span>
+            <small>Three-step application with radio choices and consent.</small>
+          </a>
+          <a class="docs-link-card" href="./examples/minimal-job-form.html">
+            <span>Minimal job form</span>
+            <small>Two-step starter example for quick integration checks.</small>
+          </a>
+          <a class="docs-link-card" href="./examples/async-validation.html">
+            <span>Validator integration laboratory</span>
+            <small>Native-only, synchronous, asynchronous, service-failure, and teardown cases with screen reader expectations.</small>
+          </a>
+          <a class="docs-link-card" href="./examples/review-and-edit.html">
+            <span>Review and edit</span>
+            <small>Author provided review groups with safe field mappings and native edit buttons.</small>
+          </a>
+          <a class="docs-link-card" href="./examples/print-friendly-review.html">
+            <span>Print-friendly application review</span>
+            <small>Semantic review markup and print CSS using only the browser print dialog.</small>
+          </a>
+        </div>
+      </section>
+
+      <section class="docs-band" id="source" aria-labelledby="source-title">
+        <div class="docs-section-heading">
+          <p class="docs-eyebrow">Source</p>
+          <h2 id="source-title">Code visible on the Pages site</h2>
+          <p>
+            Files in <code>examples/</code> are editable build inputs. Run
+            <code>npm run pages:build</code> and open <code>docs/index.html</code>
+            to preview the rewritten, publish-ready asset paths. Do not edit
+            <code>docs/</code> by hand because the next build replaces it.
+          </p>
+        </div>
+
+        <div class="docs-code-grid">
+          <article class="docs-code-panel">
+            <h3>Load the published assets</h3>
+            <pre><code>&lt;link rel="stylesheet" href="./dist/styles.css" /&gt;
+&lt;link rel="stylesheet" href="./assets/themes/a11y-form-wizard-theme-default.css" /&gt;
+
+&lt;script type="module"&gt;
+  import { initA11yFormWizardAll } from './dist/index.js';
+
+  initA11yFormWizardAll();
+&lt;/script&gt;</code></pre>
+          </article>
+
+          <article class="docs-code-panel">
+            <h3>Files exposed from /docs</h3>
+            <ul class="docs-file-list">
+              <li><a href="./dist/index.js">dist/index.js</a></li>
+              <li><a href="./dist/styles.css">dist/styles.css</a></li>
+              <li><a href="./assets/themes/a11y-form-wizard-theme-default.css">assets/themes/a11y-form-wizard-theme-default.css</a></li>
+              <li><a href="./assets/themes/a11y-form-wizard-theme-amber.css">assets/themes/a11y-form-wizard-theme-amber.css</a></li>
+              <li><a href="./assets/themes/a11y-form-wizard-theme-dark.css">assets/themes/a11y-form-wizard-theme-dark.css</a></li>
+              <li><a href="./assets/themes/a11y-form-wizard-theme-contrast.css">assets/themes/a11y-form-wizard-theme-contrast.css</a></li>
+              <li><a href="./assets/themes/a11y-form-wizard-theme-mono.css">assets/themes/a11y-form-wizard-theme-mono.css</a></li>
+              <li><a href="./assets/themes/a11y-form-wizard-theme-ocean.css">assets/themes/a11y-form-wizard-theme-ocean.css</a></li>
+              <li><a href="./assets/themes/a11y-form-wizard-theme-rose.css">assets/themes/a11y-form-wizard-theme-rose.css</a></li>
+              <li><a href="./assets/themes/a11y-form-wizard-theme-sage.css">assets/themes/a11y-form-wizard-theme-sage.css</a></li>
+              <li><a href="./assets/docs.css">assets/docs.css</a></li>
+              <li><a href="./basic/">basic/index.html</a></li>
+              <li><a href="./examples/theme-gallery.html">examples/theme-gallery.html</a></li>
+              <li><a href="./examples/customer-support-application.html">examples/customer-support-application.html</a></li>
+              <li><a href="./examples/job-application.html">examples/job-application.html</a></li>
+              <li><a href="./examples/markup-flexibility.html">examples/markup-flexibility.html</a></li>
+              <li><a href="./examples/minimal-job-form.html">examples/minimal-job-form.html</a></li>
+              <li><a href="./examples/async-validation.html">examples/async-validation.html</a></li>
+              <li><a href="./examples/review-and-edit.html">examples/review-and-edit.html</a></li>
+              <li><a href="./examples/print-friendly-review.html">examples/print-friendly-review.html</a></li>
+              <li><a href="./examples/stacked-application-accordion.html">examples/stacked-application-accordion.html</a></li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="docs-band" id="limitations" aria-labelledby="limitations-title">
+        <div class="docs-section-heading">
+          <p class="docs-eyebrow">Boundaries</p>
+          <h2 id="limitations-title">Limitations</h2>
+          <p>
+            The plugin manages wizard behavior, not your complete form delivery
+            or accessibility assurance process.
+          </p>
+        </div>
+        <ul class="docs-check-list docs-check-list--columns">
+          <li>Markup is not generated automatically; authors provide the semantic form structure.</li>
+          <li>Production forms still require a real endpoint, server-side validation, security controls, and error handling.</li>
+          <li>Review mappings create another visible copy of selected values; omit sensitive mappings or provide static redacted text.</li>
+          <li>Remote validation, retries, authentication, privacy notices, and data minimization belong to consumer adapter code.</li>
+          <li>Adapter cancellation stops wizard updates immediately, but underlying work stops only when the adapter honors the provided <code>AbortSignal</code>.</li>
+          <li>The package does not auto-initialize on import.</li>
+          <li>Static demos prevent submission and use placeholder form actions.</li>
+          <li>Repository theme files support the demos; the npm package exports the base stylesheet.</li>
+          <li>Test target browser and assistive-technology combinations before release.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="docs-footer">
+      <p>
+        A11y Form Wizard is an MIT-licensed project by Vasileios Mitsaras.
+        <a href="https://github.com/vmitsaras/A11y-Form-Wizard">View the source on GitHub</a>
+        or <a href="https://github.com/vmitsaras/A11y-Form-Wizard/issues">report an issue</a>.
+      </p>
+    </footer>
+
+    <script type="module">
+      import { initA11yFormWizardAll } from './dist/index.js';
+
+      initA11yFormWizardAll();
+    </script>
+  </body>
+</html>
